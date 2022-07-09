@@ -12,6 +12,12 @@ from resources.technical_resource import TechnicalResource, TechnicalsResource
 from resources.derivative_analysis_resource import DerivativeAnalysisResource, DetailedDerivativeAnalysisResource
 
 api_bp = Blueprint('api', __name__)
+
+@api_bp.route('/')
+def index():
+ return render_template('index.html')
+
+
 api = Api(api_bp)
 
 # Route

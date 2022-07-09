@@ -9,6 +9,7 @@ def create_app(config_filename):
     myapp.config.from_object(config_filename)
 
     from app import api_bp
+    
     myapp.register_blueprint(api_bp, url_prefix='/api')
 
     from model import db, MongoEngineJSONEncoder
@@ -16,7 +17,6 @@ def create_app(config_filename):
     db.init_app(myapp)
 
     return myapp
-
 
 if __name__ == "__main__":
     app = create_app("config")
