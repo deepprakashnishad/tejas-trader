@@ -15,8 +15,8 @@ DB_URL = f"mongodb://localhost:27017/{DB_NAME}"
 
 PROD_DB_NAME = "quantTrader"
 PROD_REPLICA_SET = "atlas-l9f6r8-shard-0"
-# PROD_DB_URL = "mongodb://stockedge:SnGAcQYwC9jUWGXY@cluster0-shard-00-00.gexxa.mongodb.net:27017,cluster0-shard-00-01.gexxa.mongodb.net:27017,cluster0-shard-00-02.gexxa.mongodb.net:27017/quantTrader?ssl=true&replicaSet=atlas-l9f6r8-shard-0&authSource=admin&retryWrites=false&w=majority"
-PROD_DB_URL = "mongodb+srv://stockedge:SnGAcQYwC9jUWGXY@cluster0.gexxa.mongodb.net/quantTrader?retryWrites=true&w=majority&replicaSet=atlas-l9f6r8-shard-0"
+PROD_DB_URL = "mongodb://stockedge:SnGAcQYwC9jUWGXY@cluster0-shard-00-00.gexxa.mongodb.net:27017,cluster0-shard-00-01.gexxa.mongodb.net:27017,cluster0-shard-00-02.gexxa.mongodb.net:27017/quantTrader?ssl=true&replicaSet=atlas-l9f6r8-shard-0&authSource=admin&retryWrites=false&w=majority"
+# PROD_DB_URL = "mongodb+srv://stockedge:SnGAcQYwC9jUWGXY@cluster0.gexxa.mongodb.net/quantTrader?retryWrites=true&w=majority&replicaSet=atlas-l9f6r8-shard-0"
 
 
 RAPID_API_KEY = "ab87ed58b2msh78f8c53185c415bp161652jsnff19e78ce6eb"
