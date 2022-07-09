@@ -1,7 +1,6 @@
 mongoengine
 pymongo
 python-dateutil
-TA-Lib
 pandas
 MongoAlchemyVoltron
 kiteconnect
