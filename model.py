@@ -44,13 +44,13 @@ class MongoEngineJSONEncoder(JSONEncoder):
             out = dict(obj._fields)
             for k, v in out.items():
                 if isinstance(v, ObjectIdField):
-                    if k is "mongo_id":
+                    if k == "mongo_id":
                         out['_id'] = str(obj.__getattribute__(k))
                         del (out[k])
                     else:
                         # Unlikely that we'll hit this since ObjectId is always NULL key
                         out[k] = str(obj.__getattribute__(k))
-                elif k is "_id":
+                elif k == "_id":
                     continue
                 else:
                     try:
