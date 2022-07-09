@@ -1,4 +1,4 @@
-mongoengine
+mongoengine==0.23.1
 pymongo==2.8.1
 python-dateutil
 pandas
