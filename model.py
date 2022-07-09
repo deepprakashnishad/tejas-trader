@@ -11,7 +11,6 @@ from flask.json import JSONEncoder
 import mongoengine
 from flask import Flask
 from bson import json_util, ObjectId
-from idna import unicode
 from pymongo import MongoClient
 
 ma = Marshmallow()
