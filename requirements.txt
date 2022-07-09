@@ -1,5 +1,5 @@
 mongoengine
-pymongo
+pymongo==4.1.1
 python-dateutil
 pandas
 MongoAlchemyVoltron
