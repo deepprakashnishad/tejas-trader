@@ -20,7 +20,7 @@ def create_app(config_filename):
 
 if __name__ == "__main__":
     app = create_app("config")
-    if mconst.ENV=="PROD"
+    if mconst.ENV=="PROD":
         app.run()
-    else
+    else:
         app.run(debug=True, port=5002)
