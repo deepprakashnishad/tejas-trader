@@ -1,1 +1,1 @@
-web: gunicorn kiteautotrader.app:app
+web: gunicorn app:app
