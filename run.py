@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_pymongo import PyMongo
 from mongoengine_jsonencoder import MongoEngineJSONEncoder
+from utils import my_constants as mconst
 
+myapp = Flask(__name__)
 
 def create_app(config_filename):
-    myapp = Flask(__name__)
     myapp.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
     myapp.config.from_object(config_filename)
 
@@ -20,4 +21,7 @@ def create_app(config_filename):
 
 if __name__ == "__main__":
     app = create_app("config")
-    app.run(debug=True, port=5002)
+    if mconst.ENV=="PROD"
+        app.run()
+    else
+        app.run(debug=True, port=5002)
