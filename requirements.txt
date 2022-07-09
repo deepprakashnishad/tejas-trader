@@ -12,4 +12,3 @@ flask_script==2.0.6
 flask_migrate==2.1.1
 marshmallow==2.14.0
 flask_marshmallow==0.8.0
-psycopg2==2.7.5
