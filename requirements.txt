@@ -1,6 +1,6 @@
 setuptools==58.0.0
 mongoengine==0.23.1
-pymongo==2.8.1
+pymongo==4.1.1
 python-dateutil
 pandas
 MongoAlchemyVoltron
