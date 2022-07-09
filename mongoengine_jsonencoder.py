@@ -6,7 +6,6 @@ import mongoengine
 from flask import Flask
 from flask.json import JSONEncoder
 from bson import json_util, ObjectId
-from idna import unicode
 from mongoengine.base import BaseDocument
 from mongoengine.queryset.base import BaseQuerySet
 
