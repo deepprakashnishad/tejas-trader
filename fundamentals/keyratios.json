@@ -1,0 +1,1167 @@
+{
+    "offset": 0,
+    "responseStatus": null,
+    "results": [
+        {
+            "endDate": "2011-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 59.5,
+                "capSpending": -285000000,
+                "dividends": 0.07,
+                "earningsPerShare": 0.33,
+                "freeCashFlow": 1013000000,
+                "freeCashFlowPerShare": 9.89,
+                "grossMarginPercent": 42.1,
+                "netIncome": 1499000000,
+                "operatingCashFlow": 1298000000,
+                "operatingIncome": 1779000000,
+                "operatingMarginPercent": 29.4,
+                "payoutRatioPercent": 20.9,
+                "revenue": 6041000000,
+                "shares": 4571000000,
+                "workingCapital": 4496000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 4.72,
+                    "freeCashFlowGrowthPercentYoy": -22.91,
+                    "freeCashFlowOrNetIncome": 0.68,
+                    "freeCashFlowOrSalesPercent": 16.77,
+                    "operatingCashFlowGrowthPercentYoy": -10.91
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.92,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 55.01,
+                    "fixedAssetsTurnover": 5.82,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 0.63,
+                    "receivablesTurnover": 6.63
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 0.14,
+                    "accountsReceivable": 18.86,
+                    "accruedLiabilities": 0.44,
+                    "cashAndShortTermInvestments": 53.98,
+                    "intangibles": 2.8,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 15.49,
+                    "otherCurrentAssets": 2.94,
+                    "otherLongTermAssets": 5.93,
+                    "otherLongTermLiabilities": 1.03,
+                    "otherShortTermLiabilities": 8.45,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 2.61,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 75.78,
+                    "totalCurrentLiabilities": 11.64,
+                    "totalLiabilities": 12.67,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 87.33
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 6.51,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.15,
+                    "quickRatio": 6.26
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 24.32,
+                        "tenYearAverage": 29.18,
+                        "threeYearAverage": 15.62,
+                        "yearOverYear": 21.85
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 24.32,
+                        "tenYearAverage": 29.18,
+                        "threeYearAverage": 15.62,
+                        "yearOverYear": 21.85
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 24.32,
+                        "tenYearAverage": 29.18,
+                        "threeYearAverage": 15.62,
+                        "yearOverYear": 21.85
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 22.93,
+                        "tenYearAverage": 30.75,
+                        "threeYearAverage": 13.1,
+                        "yearOverYear": 25.75
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 57.89,
+                    "ebtMargin": 33.87,
+                    "grossMargin": 42.11,
+                    "netIntIncAndOther": 4.42,
+                    "operatingMargin": 29.45,
+                    "other": 0,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 12.66
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.92,
+                    "financialLeverageOnAverage": 1.15,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 24.81,
+                    "returnOnAssetsPercent": 22.78,
+                    "returnOnEquityPercent": 26.11,
+                    "returnOnInvestedCapitalPercent": 22.92,
+                    "taxRatePercent": 26.74
+                }
+            },
+            "startDate": "2010-04-01"
+        },
+        {
+            "endDate": "2012-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 65.62,
+                "capSpending": -320000000,
+                "dividends": 0.09,
+                "earningsPerShare": 0.38,
+                "freeCashFlow": 1361000000,
+                "freeCashFlowPerShare": 14.08,
+                "grossMarginPercent": 41.1,
+                "netIncome": 1716000000,
+                "operatingCashFlow": 1681000000,
+                "operatingIncome": 2013000000,
+                "operatingMarginPercent": 28.8,
+                "payoutRatioPercent": 26.0,
+                "revenue": 6994000000,
+                "shares": 4571000000,
+                "workingCapital": 5008000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 4.58,
+                    "freeCashFlowGrowthPercentYoy": 34.35,
+                    "freeCashFlowOrNetIncome": 0.79,
+                    "freeCashFlowOrSalesPercent": 19.46,
+                    "operatingCashFlowGrowthPercentYoy": 29.51
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.96,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 57.38,
+                    "fixedAssetsTurnover": 6.51,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 0.66,
+                    "receivablesTurnover": 6.36
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 0.07,
+                    "accountsReceivable": 20.22,
+                    "accruedLiabilities": 2.83,
+                    "cashAndShortTermInvestments": 54.6,
+                    "intangibles": 3.04,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 14.1,
+                    "otherCurrentAssets": 4.06,
+                    "otherLongTermAssets": 3.98,
+                    "otherLongTermLiabilities": 0.32,
+                    "otherShortTermLiabilities": 5.47,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 4.07,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 78.88,
+                    "totalCurrentLiabilities": 12.43,
+                    "totalLiabilities": 12.75,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 87.25
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 6.34,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.15,
+                    "quickRatio": 6.02
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 18.76,
+                        "tenYearAverage": 27.41,
+                        "threeYearAverage": 13.58,
+                        "yearOverYear": 13.15
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 18.76,
+                        "tenYearAverage": 27.41,
+                        "threeYearAverage": 13.58,
+                        "yearOverYear": 13.15
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 18.76,
+                        "tenYearAverage": 27.41,
+                        "threeYearAverage": 13.58,
+                        "yearOverYear": 13.15
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 17.75,
+                        "tenYearAverage": 29.07,
+                        "threeYearAverage": 14.47,
+                        "yearOverYear": 15.78
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 58.88,
+                    "ebtMargin": 34.46,
+                    "grossMargin": 41.12,
+                    "netIntIncAndOther": 5.68,
+                    "operatingMargin": 28.78,
+                    "other": 0,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 12.34
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.96,
+                    "financialLeverageOnAverage": 1.15,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 24.54,
+                    "returnOnAssetsPercent": 23.59,
+                    "returnOnEquityPercent": 27.03,
+                    "returnOnInvestedCapitalPercent": 22.83,
+                    "taxRatePercent": 28.8
+                }
+            },
+            "startDate": "2011-04-01"
+        },
+        {
+            "endDate": "2013-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 81.09,
+                "capSpending": -384000000,
+                "dividends": 0.08,
+                "earningsPerShare": 0.38,
+                "freeCashFlow": 1354000000,
+                "freeCashFlowPerShare": 15.95,
+                "grossMarginPercent": 37.3,
+                "netIncome": 1725000000,
+                "operatingCashFlow": 1738000000,
+                "operatingIncome": 1911000000,
+                "operatingMarginPercent": 25.8,
+                "payoutRatioPercent": 21.9,
+                "revenue": 7398000000,
+                "shares": 4571000000,
+                "workingCapital": 5347000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 5.19,
+                    "freeCashFlowGrowthPercentYoy": -0.51,
+                    "freeCashFlowOrNetIncome": 0.78,
+                    "freeCashFlowOrSalesPercent": 18.3,
+                    "operatingCashFlowGrowthPercentYoy": 3.39
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.92,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 60.71,
+                    "fixedAssetsTurnover": 6.56,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 1.57,
+                    "receivablesTurnover": 6.01
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 0.41,
+                    "accountsReceivable": 22.78,
+                    "accruedLiabilities": 2.76,
+                    "cashAndShortTermInvestments": 50.84,
+                    "intangibles": 5.06,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 13.95,
+                    "otherCurrentAssets": 2.56,
+                    "otherLongTermAssets": 4.81,
+                    "otherLongTermLiabilities": 0.59,
+                    "otherShortTermLiabilities": 6.01,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 4.38,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 76.18,
+                    "totalCurrentLiabilities": 13.56,
+                    "totalLiabilities": 14.15,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 85.85
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 5.62,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.16,
+                    "quickRatio": 5.43
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 10.67,
+                        "tenYearAverage": 24.21,
+                        "threeYearAverage": 9.39,
+                        "yearOverYear": -5.07
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 10.67,
+                        "tenYearAverage": 24.21,
+                        "threeYearAverage": 9.39,
+                        "yearOverYear": -5.07
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 10.67,
+                        "tenYearAverage": 24.21,
+                        "threeYearAverage": 9.39,
+                        "yearOverYear": -5.07
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 12.12,
+                        "tenYearAverage": 25.66,
+                        "threeYearAverage": 15.48,
+                        "yearOverYear": 5.78
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 62.68,
+                    "ebtMargin": 31.66,
+                    "grossMargin": 37.32,
+                    "netIntIncAndOther": 5.83,
+                    "operatingMargin": 25.83,
+                    "other": 1.28,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 10.21
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.92,
+                    "financialLeverageOnAverage": 1.16,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 23.32,
+                    "returnOnAssetsPercent": 21.46,
+                    "returnOnEquityPercent": 24.81,
+                    "returnOnInvestedCapitalPercent": 21.32,
+                    "taxRatePercent": 26.35
+                }
+            },
+            "startDate": "2012-04-01"
+        },
+        {
+            "endDate": "2014-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 94.67,
+                "capSpending": -451000000,
+                "dividends": 0.1,
+                "earningsPerShare": 0.39,
+                "freeCashFlow": 1552000000,
+                "freeCashFlowPerShare": 18.22,
+                "grossMarginPercent": 35.8,
+                "netIncome": 1751000000,
+                "operatingCashFlow": 2003000000,
+                "operatingIncome": 1979000000,
+                "operatingMarginPercent": 24.0,
+                "payoutRatioPercent": 26.9,
+                "revenue": 8249000000,
+                "shares": 4571000000,
+                "workingCapital": 5656000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 5.47,
+                    "freeCashFlowGrowthPercentYoy": 14.62,
+                    "freeCashFlowOrNetIncome": 0.89,
+                    "freeCashFlowOrSalesPercent": 18.81,
+                    "operatingCashFlowGrowthPercentYoy": 15.25
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.91,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 59.71,
+                    "fixedAssetsTurnover": 6.58,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 2.21,
+                    "receivablesTurnover": 6.11
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 0.3,
+                    "accountsReceivable": 21.81,
+                    "accruedLiabilities": 3.23,
+                    "cashAndShortTermInvestments": 50.84,
+                    "intangibles": 4.38,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 13.82,
+                    "otherCurrentAssets": 2.75,
+                    "otherLongTermAssets": 6.4,
+                    "otherLongTermLiabilities": 0.68,
+                    "otherShortTermLiabilities": 7.04,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 5.43,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 75.4,
+                    "totalCurrentLiabilities": 16.01,
+                    "totalLiabilities": 16.69,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 83.31
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 4.71,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.2,
+                    "quickRatio": 4.54
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 7.57,
+                        "tenYearAverage": 21.04,
+                        "threeYearAverage": 3.62,
+                        "yearOverYear": 3.56
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 7.57,
+                        "tenYearAverage": 21.04,
+                        "threeYearAverage": 3.62,
+                        "yearOverYear": 3.56
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 7.57,
+                        "tenYearAverage": 21.04,
+                        "threeYearAverage": 3.62,
+                        "yearOverYear": 3.56
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 12.08,
+                        "tenYearAverage": 22.75,
+                        "threeYearAverage": 10.94,
+                        "yearOverYear": 11.5
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 64.15,
+                    "ebtMargin": 29.32,
+                    "grossMargin": 35.85,
+                    "netIntIncAndOther": 5.33,
+                    "operatingMargin": 23.99,
+                    "other": 0,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 11.86
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.91,
+                    "financialLeverageOnAverage": 1.2,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 21.23,
+                    "returnOnAssetsPercent": 19.39,
+                    "returnOnEquityPercent": 22.94,
+                    "returnOnInvestedCapitalPercent": 22.94,
+                    "taxRatePercent": 27.61
+                }
+            },
+            "startDate": "2013-04-01"
+        },
+        {
+            "endDate": "2015-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 112.39,
+                "capSpending": -367000000,
+                "dividends": 0.15,
+                "earningsPerShare": 0.44,
+                "freeCashFlow": 1389000000,
+                "freeCashFlowPerShare": 27.13,
+                "grossMarginPercent": 38.3,
+                "netIncome": 2013000000,
+                "operatingCashFlow": 1756000000,
+                "operatingIncome": 2258000000,
+                "operatingMarginPercent": 25.9,
+                "payoutRatioPercent": 34.7,
+                "revenue": 8711000000,
+                "shares": 4571000000,
+                "workingCapital": 5731000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 4.21,
+                    "freeCashFlowGrowthPercentYoy": -10.5,
+                    "freeCashFlowOrNetIncome": 0.69,
+                    "freeCashFlowOrSalesPercent": 15.95,
+                    "operatingCashFlowGrowthPercentYoy": -12.33
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.87,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 61.76,
+                    "fixedAssetsTurnover": 6.28,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 1.73,
+                    "receivablesTurnover": 5.91
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 0.21,
+                    "accountsReceivable": 21.9,
+                    "accruedLiabilities": 3.01,
+                    "cashAndShortTermInvestments": 47.09,
+                    "intangibles": 5.62,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 13.75,
+                    "otherCurrentAssets": 2.14,
+                    "otherLongTermAssets": 9.49,
+                    "otherLongTermLiabilities": 0.31,
+                    "otherShortTermLiabilities": 8.32,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 5.61,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 71.14,
+                    "totalCurrentLiabilities": 17.15,
+                    "totalLiabilities": 17.46,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 82.54
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 4.15,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.21,
+                    "quickRatio": 4.02
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 9.11,
+                        "tenYearAverage": 17.35,
+                        "threeYearAverage": 3.9,
+                        "yearOverYear": 14.1
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 9.11,
+                        "tenYearAverage": 17.35,
+                        "threeYearAverage": 3.9,
+                        "yearOverYear": 14.1
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 9.11,
+                        "tenYearAverage": 17.35,
+                        "threeYearAverage": 3.9,
+                        "yearOverYear": 14.1
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 12.64,
+                        "tenYearAverage": 18.53,
+                        "threeYearAverage": 7.59,
+                        "yearOverYear": 5.6
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 61.69,
+                    "ebtMargin": 32.35,
+                    "grossMargin": 38.31,
+                    "netIntIncAndOther": 6.43,
+                    "operatingMargin": 25.92,
+                    "other": 0,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 12.39
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.87,
+                    "financialLeverageOnAverage": 1.21,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 23.11,
+                    "returnOnAssetsPercent": 19.99,
+                    "returnOnEquityPercent": 24.12,
+                    "returnOnInvestedCapitalPercent": 20.44,
+                    "taxRatePercent": 28.57
+                }
+            },
+            "startDate": "2014-04-01"
+        },
+        {
+            "endDate": "2016-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 127.49,
+                "capSpending": -413000000,
+                "dividends": 0.19,
+                "earningsPerShare": 0.45,
+                "freeCashFlow": 1449000000,
+                "freeCashFlowPerShare": 12.67,
+                "grossMarginPercent": 37.4,
+                "netIncome": 2052000000,
+                "operatingCashFlow": 1862000000,
+                "operatingIncome": 2375000000,
+                "operatingMarginPercent": 25.0,
+                "payoutRatioPercent": 43.6,
+                "revenue": 9501000000,
+                "shares": 4571000000,
+                "workingCapital": 5804000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 4.35,
+                    "freeCashFlowGrowthPercentYoy": 4.32,
+                    "freeCashFlowOrNetIncome": 0.71,
+                    "freeCashFlowOrSalesPercent": 15.25,
+                    "operatingCashFlowGrowthPercentYoy": 6.04
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.86,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 62.7,
+                    "fixedAssetsTurnover": 6.23,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 2.45,
+                    "receivablesTurnover": 5.82
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 0.51,
+                    "accountsReceivable": 22.77,
+                    "accruedLiabilities": 2.91,
+                    "cashAndShortTermInvestments": 43.47,
+                    "intangibles": 6.3,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 13.97,
+                    "otherCurrentAssets": 2.33,
+                    "otherLongTermAssets": 11.16,
+                    "otherLongTermLiabilities": 0.49,
+                    "otherShortTermLiabilities": 7.89,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 6.25,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 68.57,
+                    "totalCurrentLiabilities": 17.56,
+                    "totalLiabilities": 18.05,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 81.95
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 3.9,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.22,
+                    "quickRatio": 3.77
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 5.95,
+                        "tenYearAverage": 14.77,
+                        "threeYearAverage": 7.51,
+                        "yearOverYear": 5.18
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 5.95,
+                        "tenYearAverage": 14.77,
+                        "threeYearAverage": 7.51,
+                        "yearOverYear": 5.18
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 5.95,
+                        "tenYearAverage": 14.77,
+                        "threeYearAverage": 7.51,
+                        "yearOverYear": 5.18
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 9.48,
+                        "tenYearAverage": 16.01,
+                        "threeYearAverage": 8.7,
+                        "yearOverYear": 9.07
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 62.62,
+                    "ebtMargin": 30.01,
+                    "grossMargin": 37.38,
+                    "netIntIncAndOther": 5.01,
+                    "operatingMargin": 25.0,
+                    "other": 0,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 12.38
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.86,
+                    "financialLeverageOnAverage": 1.22,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 21.6,
+                    "returnOnAssetsPercent": 18.66,
+                    "returnOnEquityPercent": 22.69,
+                    "returnOnInvestedCapitalPercent": 19.63,
+                    "taxRatePercent": 28.03
+                }
+            },
+            "startDate": "2015-04-01"
+        },
+        {
+            "endDate": "2017-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 136.81,
+                "capSpending": -411000000,
+                "dividends": 0.19,
+                "earningsPerShare": 0.47,
+                "freeCashFlow": 1688000000,
+                "freeCashFlowPerShare": 23.94,
+                "grossMarginPercent": 36.9,
+                "netIncome": 2140000000,
+                "operatingCashFlow": 2099000000,
+                "operatingIncome": 2575000000,
+                "operatingMarginPercent": 25.2,
+                "payoutRatioPercent": 40.0,
+                "revenue": 10208000000,
+                "shares": 4573000000,
+                "workingCapital": 6121000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 4.03,
+                    "freeCashFlowGrowthPercentYoy": 16.49,
+                    "freeCashFlowOrNetIncome": 0.79,
+                    "freeCashFlowOrSalesPercent": 16.54,
+                    "operatingCashFlowGrowthPercentYoy": 12.73
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.84,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 64.54,
+                    "fixedAssetsTurnover": 6.01,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 3.26,
+                    "receivablesTurnover": 5.66
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 0.44,
+                    "accountsReceivable": 22.44,
+                    "accruedLiabilities": 3.1,
+                    "cashAndShortTermInvestments": 39.11,
+                    "intangibles": 5.31,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 14.06,
+                    "otherCurrentAssets": 2.89,
+                    "otherLongTermAssets": 16.2,
+                    "otherLongTermLiabilities": 0.44,
+                    "otherShortTermLiabilities": 7.13,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 6.13,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 64.43,
+                    "totalCurrentLiabilities": 16.81,
+                    "totalLiabilities": 17.25,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 82.75
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 3.83,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.21,
+                    "quickRatio": 3.66
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 5.05,
+                        "tenYearAverage": 11.7,
+                        "threeYearAverage": 9.17,
+                        "yearOverYear": 8.42
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 5.05,
+                        "tenYearAverage": 11.7,
+                        "threeYearAverage": 9.17,
+                        "yearOverYear": 8.42
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 5.05,
+                        "tenYearAverage": 11.7,
+                        "threeYearAverage": 9.17,
+                        "yearOverYear": 8.42
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 7.86,
+                        "tenYearAverage": 12.69,
+                        "threeYearAverage": 7.36,
+                        "yearOverYear": 7.44
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 63.15,
+                    "ebtMargin": 29.13,
+                    "grossMargin": 36.85,
+                    "netIntIncAndOther": 3.91,
+                    "operatingMargin": 25.23,
+                    "other": 1.64,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 9.99
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.84,
+                    "financialLeverageOnAverage": 1.21,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 20.96,
+                    "returnOnAssetsPercent": 17.66,
+                    "returnOnEquityPercent": 21.44,
+                    "returnOnInvestedCapitalPercent": 18.7,
+                    "taxRatePercent": 28.04
+                }
+            },
+            "startDate": "2016-04-01"
+        },
+        {
+            "endDate": "2018-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 142.58,
+                "capSpending": -310000000,
+                "dividends": 0.21,
+                "earningsPerShare": 0.55,
+                "freeCashFlow": 1947000000,
+                "freeCashFlowPerShare": 28.08,
+                "grossMarginPercent": 36.0,
+                "netIncome": 2486000000,
+                "operatingCashFlow": 2257000000,
+                "operatingIncome": 2670000000,
+                "operatingMarginPercent": 24.4,
+                "payoutRatioPercent": 39.6,
+                "revenue": 10939000000,
+                "shares": 4515000000,
+                "workingCapital": 5509000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 2.83,
+                    "freeCashFlowGrowthPercentYoy": 15.34,
+                    "freeCashFlowOrNetIncome": 0.78,
+                    "freeCashFlowOrSalesPercent": 17.8,
+                    "operatingCashFlowGrowthPercentYoy": 7.53
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.87,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 65.33,
+                    "fixedAssetsTurnover": 5.96,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 4.8,
+                    "receivablesTurnover": 5.59
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 1.04,
+                    "accountsReceivable": 24.33,
+                    "accruedLiabilities": 3.07,
+                    "cashAndShortTermInvestments": 32.83,
+                    "intangibles": 3.08,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 15.2,
+                    "otherCurrentAssets": 5.45,
+                    "otherLongTermAssets": 19.11,
+                    "otherLongTermLiabilities": 1.07,
+                    "otherShortTermLiabilities": 9.44,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 4.11,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 62.61,
+                    "totalCurrentLiabilities": 17.66,
+                    "totalLiabilities": 18.73,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 81.27
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 3.55,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.23,
+                    "quickRatio": 3.24
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 6.92,
+                        "tenYearAverage": 8.78,
+                        "threeYearAverage": 5.75,
+                        "yearOverYear": 3.69
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 6.92,
+                        "tenYearAverage": 8.78,
+                        "threeYearAverage": 5.75,
+                        "yearOverYear": 3.69
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 6.92,
+                        "tenYearAverage": 8.78,
+                        "threeYearAverage": 5.75,
+                        "yearOverYear": 3.69
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 8.14,
+                        "tenYearAverage": 10.11,
+                        "threeYearAverage": 7.89,
+                        "yearOverYear": 7.16
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 64.0,
+                    "ebtMargin": 28.73,
+                    "grossMargin": 36.0,
+                    "netIntIncAndOther": 4.32,
+                    "operatingMargin": 24.41,
+                    "other": 1.39,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 10.2
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.87,
+                    "financialLeverageOnAverage": 1.23,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 22.73,
+                    "returnOnAssetsPercent": 19.8,
+                    "returnOnEquityPercent": 24.14,
+                    "returnOnInvestedCapitalPercent": 21.33,
+                    "taxRatePercent": 20.9
+                }
+            },
+            "startDate": "2017-04-01"
+        },
+        {
+            "endDate": "2019-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 149.33,
+                "capSpending": -349000000,
+                "dividends": 0.24,
+                "earningsPerShare": 0.51,
+                "freeCashFlow": 1913000000,
+                "freeCashFlowPerShare": 29.77,
+                "grossMarginPercent": 34.9,
+                "netIncome": 2199000000,
+                "operatingCashFlow": 2262000000,
+                "operatingIncome": 2731000000,
+                "operatingMarginPercent": 23.1,
+                "payoutRatioPercent": 48.7,
+                "revenue": 11799000000,
+                "shares": 4353000000,
+                "workingCapital": 4951000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 2.96,
+                    "freeCashFlowGrowthPercentYoy": -1.75,
+                    "freeCashFlowOrNetIncome": 0.87,
+                    "freeCashFlowOrSalesPercent": 16.21,
+                    "operatingCashFlowGrowthPercentYoy": 0.22
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 0.96,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 64.34,
+                    "fixedAssetsTurnover": 6.22,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 9.07,
+                    "receivablesTurnover": 5.67
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 2.08,
+                    "accountsReceivable": 27.45,
+                    "accruedLiabilities": 3.92,
+                    "cashAndShortTermInvestments": 30.91,
+                    "intangibles": 5.0,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 15.76,
+                    "otherCurrentAssets": 4.03,
+                    "otherLongTermAssets": 16.85,
+                    "otherLongTermLiabilities": 1.3,
+                    "otherShortTermLiabilities": 12.38,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 3.61,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 62.39,
+                    "totalCurrentLiabilities": 22.0,
+                    "totalLiabilities": 23.29,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 76.71
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 2.84,
+                    "debtOrEquity": 0,
+                    "financialLeverage": 1.3,
+                    "quickRatio": 2.65
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 6.65,
+                        "tenYearAverage": 7.11,
+                        "threeYearAverage": 4.77,
+                        "yearOverYear": 2.28
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 6.65,
+                        "tenYearAverage": 7.11,
+                        "threeYearAverage": 4.77,
+                        "yearOverYear": 2.28
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 6.65,
+                        "tenYearAverage": 7.11,
+                        "threeYearAverage": 4.77,
+                        "yearOverYear": 2.28
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 7.42,
+                        "tenYearAverage": 9.73,
+                        "threeYearAverage": 7.49,
+                        "yearOverYear": 7.86
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 65.15,
+                    "ebtMargin": 25.45,
+                    "grossMargin": 34.85,
+                    "netIntIncAndOther": 2.31,
+                    "operatingMargin": 23.15,
+                    "other": 1.36,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 10.34
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 0.96,
+                    "financialLeverageOnAverage": 1.3,
+                    "interestCoverage": 0,
+                    "netMarginPercent": 18.64,
+                    "returnOnAssetsPercent": 17.95,
+                    "returnOnEquityPercent": 22.73,
+                    "returnOnInvestedCapitalPercent": 20.51,
+                    "taxRatePercent": 26.74
+                }
+            },
+            "startDate": "2018-04-01"
+        },
+        {
+            "endDate": "2020-03-31",
+            "includesTrailing12Months": false,
+            "keyRatioFinancialsSection": {
+                "bookValuePerShare": 151.6,
+                "capSpending": -465000000,
+                "dividends": 0.26,
+                "earningsPerShare": 0.55,
+                "freeCashFlow": 2146000000,
+                "freeCashFlowPerShare": 33.09,
+                "grossMarginPercent": 33.1,
+                "netIncome": 2331000000,
+                "operatingCashFlow": 2611000000,
+                "operatingIncome": 2748000000,
+                "operatingMarginPercent": 21.5,
+                "payoutRatioPercent": 48.0,
+                "revenue": 12780000000,
+                "shares": 4265000000,
+                "workingCapital": 4455000000
+            },
+            "keyRatioStatisticsSection": {
+                "cashflowRatiosSection": {
+                    "capExAsAPercentOfSales": 3.64,
+                    "freeCashFlowGrowthPercentYoy": 12.18,
+                    "freeCashFlowOrNetIncome": 0.92,
+                    "freeCashFlowOrSalesPercent": 16.79,
+                    "operatingCashFlowGrowthPercentYoy": 15.43
+                },
+                "efficiencyRatiosSection": {
+                    "assetTurnover": 1.04,
+                    "cashConversionCycle": 0,
+                    "daysInventory": 0,
+                    "daysSalesOutstanding": 65.5,
+                    "fixedAssetsTurnover": 5.96,
+                    "inventoryTurnover": 0,
+                    "payablesPeriod": 13.7,
+                    "receivablesTurnover": 5.57
+                },
+                "financialHealthBalanceSheetSection": {
+                    "accountsPayable": 3.17,
+                    "accountsReceivable": 30.08,
+                    "accruedLiabilities": 4.24,
+                    "cashAndShortTermInvestments": 25.16,
+                    "intangibles": 7.75,
+                    "inventory": 0,
+                    "longTermDebt": 0,
+                    "netPpAndE": 19.26,
+                    "otherCurrentAssets": 3.58,
+                    "otherLongTermAssets": 14.17,
+                    "otherLongTermLiabilities": 6.57,
+                    "otherShortTermLiabilities": 11.66,
+                    "shortTermDebt": 0,
+                    "taxesPayable": 3.51,
+                    "totalAssets": 100.0,
+                    "totalCurrentAssets": 58.83,
+                    "totalCurrentLiabilities": 22.59,
+                    "totalLiabilities": 29.16,
+                    "totalLiabilitiesAndEquity": 100.0,
+                    "totalStockholdersEquity": 70.84
+                },
+                "financialHealthLiquiditySection": {
+                    "currentRatio": 2.62,
+                    "debtOrEquity": 0.06,
+                    "financialLeverage": 1.41,
+                    "quickRatio": 2.46
+                },
+                "growthSection": {
+                    "earningsPerShareGrowthSection": {
+                        "fiveYearAverage": 4.01,
+                        "tenYearAverage": 6.53,
+                        "threeYearAverage": 2.19,
+                        "yearOverYear": 0.62
+                    },
+                    "netIncomeGrowthSection": {
+                        "fiveYearAverage": 4.01,
+                        "tenYearAverage": 6.53,
+                        "threeYearAverage": 2.19,
+                        "yearOverYear": 0.62
+                    },
+                    "operatingIncomeGrowthSection": {
+                        "fiveYearAverage": 4.01,
+                        "tenYearAverage": 6.53,
+                        "threeYearAverage": 2.19,
+                        "yearOverYear": 0.62
+                    },
+                    "revenueGrowthSection": {
+                        "fiveYearAverage": 7.97,
+                        "tenYearAverage": 10.28,
+                        "threeYearAverage": 7.78,
+                        "yearOverYear": 8.31
+                    }
+                },
+                "marginsPercentageOfSalesSection": {
+                    "cogs": 66.92,
+                    "ebtMargin": 24.22,
+                    "grossMargin": 33.08,
+                    "netIntIncAndOther": 2.72,
+                    "operatingMargin": 21.5,
+                    "other": 1.39,
+                    "rAndD": 0,
+                    "revenue": 100.0,
+                    "sgAndA": 10.19
+                },
+                "profitabilitySection": {
+                    "assetTurnoverOnAverage": 1.04,
+                    "financialLeverageOnAverage": 1.41,
+                    "interestCoverage": 129.96,
+                    "netMarginPercent": 18.24,
+                    "returnOnAssetsPercent": 19.02,
+                    "returnOnEquityPercent": 25.85,
+                    "returnOnInvestedCapitalPercent": 22.32,
+                    "taxRatePercent": 24.46
+                }
+            },
+            "startDate": "2019-04-01"
+        }
+    ],
+    "total": 10
+}
