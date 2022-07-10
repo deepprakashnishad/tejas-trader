@@ -4,6 +4,7 @@ from mongoengine_jsonencoder import MongoEngineJSONEncoder
 from utils import my_constants as mconst
 
 app = Flask(__name__)
+CORS(app)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 app.config.from_object("config")
 
@@ -34,7 +35,6 @@ def hello_world():
 #     return app
 
 if __name__ == "__main__":
-    app = create_app("config")
     if mconst.ENV=="PROD":
         app.run()
     else:
