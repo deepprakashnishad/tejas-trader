@@ -25,6 +25,7 @@ if env=="PROD":
 else:
     db_url = mconst.DB_URL
     db_name = mconst.DB_NAME
+    app.config["MONGOALCHEMY_REPLICA_SET"] = mconst.DEV_REPLICA_SET
     
 # db_url = mconst.DB_URL
 app.config["MONGOALCHEMY_DATABASE"] = db_name
@@ -41,7 +42,11 @@ class MongoEngineJSONEncoder(JSONEncoder):
             return obj
         if isinstance(obj, (db.Document)):
             out = dict(obj._fields)
-            for k, v in out.items():
+            print(out)
+            items = out.items()
+            for temp in list(items):
+                k=temp[0]
+                v = temp[1]
                 if isinstance(v, ObjectIdField):
                     if k == "mongo_id":
                         out['_id'] = str(obj.__getattribute__(k))
@@ -82,10 +87,12 @@ class MongoEngineJSONEncoder(JSONEncoder):
             out = str(obj)
         elif isinstance(obj, ObjectId):
             out = {'ObjectId': str(obj)}
-        elif isinstance(obj, (str, unicode)):
+        elif isinstance(obj, (str)):
             out = obj
         elif isinstance(obj, float):
             out = str(obj)
+        elif(isinstance(obj, int)):
+            out=int(obj)
         else:
             raise TypeError("Could not JSON-encode type '%s': %s" % (type(obj), str(obj)))
         return out

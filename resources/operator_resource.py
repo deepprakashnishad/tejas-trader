@@ -1,20 +1,12 @@
 from flask_restful import Resource
 from flask import Response, request, jsonify
-from model import Operator, Instrument, MongoEngineJSONEncoder
+from models.operator import Operator
 
 
 class OperatorsResource(Resource):
     def get(self):
-        operators = Operator.query.all()
+        operators = Operator.list()
         return jsonify(operators)
-
-    def post(self):
-        body = request.get_json()
-        return {"This is a put request"}
-
-    def put(self, id):
-        body = request.get_json()
-        return {"This is a put request"}
 
     def delete(self, id):
         Operator.remove()
@@ -22,24 +14,19 @@ class OperatorsResource(Resource):
 
 class OperatorResource(Resource):
     def get(self, name):
-        operator = Operator.query.filter(Operator.name == name).first()
+        operator = Operator.get(Operator.name == name).first()
         return jsonify({"message": "Operator fetched", "Operator": Operator})
 
     def post(self):
         body = request.get_json()
-        operator = Operator()
-        MongoEngineJSONEncoder.json_to_object(operator, body)
-        operator.save()
+        operator = Operator.create(**body)
         return jsonify({"msg": "Operator created successfully"})
 
     def put(self):
         body = request.get_json()
-        operator = Operator.query.get(body['_id'])
-        MongoEngineJSONEncoder.json_to_object(operator, body)
-        operator.save()
-        return jsonify({"msg": "Operator updated successsfully"})
+        result = Operator.update(body['_id'], **body)
+        return jsonify({"msg": "Operator updated successsfully", "result": result})
 
     def delete(self, _id):
-        operator = Operator.query.get(_id)
-        result = operator.remove()
-        return jsonify({"msg": "Operator deleted successfully"})
+        result = Operator.delete(_id)
+        return jsonify({"msg": "Operator deleted successfully", "result": result})

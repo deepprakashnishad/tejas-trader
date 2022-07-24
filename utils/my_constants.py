@@ -11,6 +11,7 @@ ALPHA_URL = "https://www.alphavantage.co/"
 
 DB_NAME = "quantTrader"
 DB_URL = f"mongodb://localhost:27017/{DB_NAME}"
+DEV_REPLICA_SET = "rs0"
 # DB_SERVER_URL = "mongodb://localhost:27017/"
 
 PROD_DB_NAME = "quantTrader"
