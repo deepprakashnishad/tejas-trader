@@ -3,7 +3,7 @@ pymongo==4.1.1
 python-dateutil==2.8.2
 pandas==1.4.3
 kiteconnect==4.1.0
-requests==2.18.4
+requests==2.27.1
 backtrader==1.9.76.123
 termcolor==1.1.0
 matplotlib==3.5.2
