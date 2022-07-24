@@ -1,4 +1,4 @@
-ENV = "DEV"
+ENV = "PROD"
 
 API_KEY = "veq0ga8pwbx9h5bf"
 API_SECRET = "sensihqgmjuynx0mxz6t7bjahzrew1t1"
