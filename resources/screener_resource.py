@@ -1,6 +1,8 @@
 from flask_restful import Resource
 from flask import Response, request, jsonify
-from model import Screener, Instrument, MongoEngineJSONEncoder
+from models.screener import Screener 
+from models.instrument import Instrument
+from model import MongoEngineJSONEncoder
 
 
 class ScreenersResource(Resource):

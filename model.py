@@ -113,102 +113,101 @@ class MongoEngineJSONEncoder(JSONEncoder):
 
 # pmc = PyMongoConnectionSingleton("localhost", 27017, "quantTrader")
 
-class User(db.Document):
-    user_id = StringField()
-    user_name = StringField()
-    user_shortname = StringField()
-    email = StringField()
-    user_type = StringField()
-    broker = StringField()
-    exchanges = AnythingField()
-    products = AnythingField()
-    access_token = StringField()
-    public_token = StringField()
-    login_time = DateTimeField()
-    avatar_url = StringField()
-    access_token_expiry = DateTimeField()
+# class User(db.Document):
+#     user_id = StringField()
+#     user_name = StringField()
+#     user_shortname = StringField()
+#     email = StringField()
+#     user_type = StringField()
+#     broker = StringField()
+#     exchanges = AnythingField()
+#     products = AnythingField()
+#     access_token = StringField()
+#     public_token = StringField()
+#     login_time = DateTimeField()
+#     avatar_url = StringField()
+#     access_token_expiry = DateTimeField()
 
 
-class UserFundMargin(db.Document):
-    user_id = StringField()
-    equity = AnythingField()
-    commodity = AnythingField()
+# class UserFundMargin(db.Document):
+#     user_id = StringField()
+#     equity = AnythingField()
+#     commodity = AnythingField()
 
 
-class Holdings(db.Document):
-    user_id = StringField()
-    tradingsymbol = StringField()
-    exchange = StringField()
-    isin = StringField()
-    quantity = IntField()
-    t1_quantity = IntField()
-    average_price = FloatField()
-    last_price = FloatField()
-    pnl = FloatField()
-    product = EnumField(StringField(), "CNC", "NRML", "MIS")
-    collateral_quantity = IntField()
-    collateral_type = StringField()
+# class Holdings(db.Document):
+#     user_id = StringField()
+#     tradingsymbol = StringField()
+#     exchange = StringField()
+#     isin = StringField()
+#     quantity = IntField()
+#     t1_quantity = IntField()
+#     average_price = FloatField()
+#     last_price = FloatField()
+#     pnl = FloatField()
+#     product = EnumField(StringField(), "CNC", "NRML", "MIS")
+#     collateral_quantity = IntField()
+#     collateral_type = StringField()
 
 
-class Instrument(db.Document):
-    instrument_token = IntField()
-    tradingsymbol = StringField()
-    lot_size = IntField()
-    instrument_type = StringField()
-    segment = StringField()
-    exchange = StringField()
+# class Instrument(db.Document):
+#     instrument_token = IntField()
+#     tradingsymbol = StringField()
+#     lot_size = IntField()
+#     instrument_type = StringField()
+#     segment = StringField()
+#     exchange = StringField()
 
-    def getInstrumentBySymbols(tokens):
-        print(tokens)
-        return pmdb["Instrument"].find({"instrument_token": {"$in": tokens}})
-
+#     def getInstrumentBySymbols(tokens):
+#         return pmdb["Instrument"].find({"instrument_token": {"$in": tokens}})
 
 
-class Position(db.Document):
-    user_id = StringField()
-    tradingsymbol = StringField()
-    exchange: StringField()
-    instrument_token = StringField()
-    product = EnumField(StringField(), "CNC", "NRML", "MIS")
-    quantity = IntField()
-    overnight_quantity = IntField()
-    multiplier = IntField()
 
-    average_price = FloatField()
-    close_price = FloatField()
-    last_price = FloatField()
-    value = FloatField()
-    pnl = FloatField()
-    m2m = FloatField()
-    unrealised = FloatField()
-    realised = FloatField()
+# class Position(db.Document):
+#     user_id = StringField()
+#     tradingsymbol = StringField()
+#     exchange: StringField()
+#     instrument_token = StringField()
+#     product = EnumField(StringField(), "CNC", "NRML", "MIS")
+#     quantity = IntField()
+#     overnight_quantity = IntField()
+#     multiplier = IntField()
 
-    buy_quantity = IntField()
-    buy_price = FloatField()
-    buy_value = FloatField()
-    buy_m2m = FloatField()
+#     average_price = FloatField()
+#     close_price = FloatField()
+#     last_price = FloatField()
+#     value = FloatField()
+#     pnl = FloatField()
+#     m2m = FloatField()
+#     unrealised = FloatField()
+#     realised = FloatField()
 
-    day_buy_quantity = IntField()
-    day_buy_price = FloatField()
-    day_buy_value = FloatField()
+#     buy_quantity = IntField()
+#     buy_price = FloatField()
+#     buy_value = FloatField()
+#     buy_m2m = FloatField()
 
-    day_sell_price = FloatField()
-    day_sell_value = FloatField()
+#     day_buy_quantity = IntField()
+#     day_buy_price = FloatField()
+#     day_buy_value = FloatField()
 
-    sell_quantity = IntField()
-    sell_price = FloatField()
-    sell_value = FloatField()
-    sell_m2m = FloatField()
+#     day_sell_price = FloatField()
+#     day_sell_value = FloatField()
+
+#     sell_quantity = IntField()
+#     sell_price = FloatField()
+#     sell_value = FloatField()
+#     sell_m2m = FloatField()
 
 
-class PaperTrade(db.Document):
-    symbol = StringField()
-    buyPrice = FloatField()
-    sellPrice = FloatField()
-    enteredAt = DateTimeField()
-    exitedAt = DateTimeField()
-    positionTaken = BoolField()
-    won = EnumField(StringField(), "Won", "Loss")
+# class PaperTrade(db.Document):
+#     symbol = StringField()
+#     buyPrice = FloatField()
+#     sellPrice = FloatField()
+#     enteredAt = DateTimeField()
+#     exitedAt = DateTimeField()
+#     positionTaken = BoolField()
+#     won = EnumField(StringField(), "Won", "Loss")
 
 
 # variety 	regular 	Regular order
@@ -225,106 +224,106 @@ class PaperTrade(db.Document):
 # validity 	DAY 	Regular order
 #   	IOC 	Immediate or Cancel
 
-class Order(db.Document):
-    order_id = StringField()
-    parent_order_id = StringField()  # Useful for bracket order
-    exchange_order_id = StringField()
-    placed_by = StringField()
-    tradingsymbol = StringField()
-    exchange = StringField()
-    transaction_type = EnumField(StringField(), "BUY", "SELL")
-    order_type = EnumField(StringField(), "MARKET", "SL", "SL-M", "LIMIT")
-    quantity = IntField()
-    product = EnumField(StringField(), "CNC", "NRML", "MIS")
-    price = FloatField()
-    trigger_price = FloatField()
-    average_price = FloatField()
-    disclosed_quantity = IntField()
-    pending_quantity = IntField()
-    filled_quantity = IntField()
-    validity = EnumField(StringField(), "DAY", "IOC")
-    tag = StringField()
-    squareoff = FloatField()  # Price difference at which the order should be squared off and profit booked (eg:
-    # Order price is 100. Profit target is 102. So squareoff = 2
-    stoploss = FloatField()  # Stoploss difference at which the order should be squared off (eg: Order price is 100.
-    # Stoploss target is 98. So stoploss = 2
-    trailing_stoploss = FloatField()
-    status = EnumField(StringField(), "COMPLETE", "REJECTED", "CANCELLED", "OPEN")
-    instrument_token = StringField()
-    order_timestamp = IntField()
-    exchange_timestamp = IntField()
-    exchange_update_timestamp = IntField()
-    status_message = StringField()
+# class Order(db.Document):
+#     order_id = StringField()
+#     parent_order_id = StringField()  # Useful for bracket order
+#     exchange_order_id = StringField()
+#     placed_by = StringField()
+#     tradingsymbol = StringField()
+#     exchange = StringField()
+#     transaction_type = EnumField(StringField(), "BUY", "SELL")
+#     order_type = EnumField(StringField(), "MARKET", "SL", "SL-M", "LIMIT")
+#     quantity = IntField()
+#     product = EnumField(StringField(), "CNC", "NRML", "MIS")
+#     price = FloatField()
+#     trigger_price = FloatField()
+#     average_price = FloatField()
+#     disclosed_quantity = IntField()
+#     pending_quantity = IntField()
+#     filled_quantity = IntField()
+#     validity = EnumField(StringField(), "DAY", "IOC")
+#     tag = StringField()
+#     squareoff = FloatField()  # Price difference at which the order should be squared off and profit booked (eg:
+#     # Order price is 100. Profit target is 102. So squareoff = 2
+#     stoploss = FloatField()  # Stoploss difference at which the order should be squared off (eg: Order price is 100.
+#     # Stoploss target is 98. So stoploss = 2
+#     trailing_stoploss = FloatField()
+#     status = EnumField(StringField(), "COMPLETE", "REJECTED", "CANCELLED", "OPEN")
+#     instrument_token = StringField()
+#     order_timestamp = IntField()
+#     exchange_timestamp = IntField()
+#     exchange_update_timestamp = IntField()
+#     status_message = StringField()
 
 
-class HistoricalData(db.Document):
-    symbol_id = AnythingField()
-    open = FloatField()
-    high = FloatField()
-    low = FloatField()
-    close = FloatField()
-    volume = IntField()
-    open_interest = IntField()
-    timeframe = IntField()
-    compression = IntField()
-    candle_creation_time = DateTimeField()
+# class HistoricalData(db.Document):
+#     symbol_id = AnythingField()
+#     open = FloatField()
+#     high = FloatField()
+#     low = FloatField()
+#     close = FloatField()
+#     volume = IntField()
+#     open_interest = IntField()
+#     timeframe = IntField()
+#     compression = IntField()
+#     candle_creation_time = DateTimeField()
 
 
-class Strategy(db.Document):
-    name = StringField()
-    description = StringField()
-    symbols = AnythingField()
-    entry_conditions = AnythingField()
-    exit_conditions = AnythingField()
-    stoploss = FloatField()
-    target = FloatField()
-    transaction_type = EnumField(StringField(), "BUY", "SELL")
-    order_type = EnumField(StringField(), "MARKET", "LIMIT", "SL", "SL-M")
-    product = EnumField(StringField(), "MIS", "CNC", "NRML")
-    timeframe = IntField()
-    compression = IntField()
-    quantity = IntField()
-    max_bet = FloatField()
+# class Strategy(db.Document):
+#     name = StringField()
+#     description = StringField()
+#     symbols = AnythingField()
+#     entry_conditions = AnythingField()
+#     exit_conditions = AnythingField()
+#     stoploss = FloatField()
+#     target = FloatField()
+#     transaction_type = EnumField(StringField(), "BUY", "SELL")
+#     order_type = EnumField(StringField(), "MARKET", "LIMIT", "SL", "SL-M")
+#     product = EnumField(StringField(), "MIS", "CNC", "NRML")
+#     timeframe = IntField()
+#     compression = IntField()
+#     quantity = IntField()
+#     max_bet = FloatField()
 
 
-class Technical(db.Document):
-    name = StringField()
-    description = StringField()
-    tech_args = AnythingField()
+# class Technical(db.Document):
+#     name = StringField()
+#     description = StringField()
+#     tech_args = AnythingField()
 
 
-class Operator(db.Document):
-    name = StringField()
-    description = StringField()
-    is_unary = BoolField()
-    tech_args = AnythingField()
+# class Operator(db.Document):
+#     name = StringField()
+#     description = StringField()
+#     is_unary = BoolField()
+#     tech_args = AnythingField()
 
 
-class DeployStrategy(db.Document):
-    user_id = StringField()
-    strategy_ids = AnythingField()
+# class DeployStrategy(db.Document):
+#     user_id = StringField()
+#     strategy_ids = AnythingField()
 
 
-class DerivativeAnalysisResult(db.Document):
-    delivery_change = FloatField()
-    close = FloatField()
-    high = FloatField()
-    low = FloatField()
-    open = FloatField()
-    coi_change = FloatField()
-    delivery = FloatField()
-    avg_del = FloatField()
-    vwap = FloatField()
-    oi_combined = FloatField()
-    price_change = FloatField()
-    position = StringField()
-    stock = StringField()
+# class DerivativeAnalysisResult(db.Document):
+#     delivery_change = FloatField()
+#     close = FloatField()
+#     high = FloatField()
+#     low = FloatField()
+#     open = FloatField()
+#     coi_change = FloatField()
+#     delivery = FloatField()
+#     avg_del = FloatField()
+#     vwap = FloatField()
+#     oi_combined = FloatField()
+#     price_change = FloatField()
+#     position = StringField()
+#     stock = StringField()
 
 
-class Screener(db.Document):
-    name = StringField()
-    description = StringField()
-    entry_conditions = AnythingField()
-    timeframe = IntField()
-    compression = IntField()
-    transaction_type = EnumField(StringField(), "BUY", "SELL")
+# class Screener(db.Document):
+#     name = StringField()
+#     description = StringField()
+#     entry_conditions = AnythingField()
+#     timeframe = IntField()
+#     compression = IntField()
+#     transaction_type = EnumField(StringField(), "BUY", "SELL")

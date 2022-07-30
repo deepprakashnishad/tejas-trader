@@ -1,7 +1,7 @@
 import json
 
 from strategies.strategy import Strategy
-from model import Strategy as StrategyDocument
+from models.strategy import Strategy as StrategyDocument
 from technicals.technical_condition import TechnicalCondition
 from technicals.technical import *
 from technicals.operators.m_operators import *
@@ -10,7 +10,7 @@ from technicals.operators.m_operators import *
 class StrategyBuilder(Strategy):
 
     def __init__(self, feed, strategy_name, symbols=None, start_time=None, end_time=None):
-        strategy_doc = StrategyDocument.query.filter(StrategyDocument.name == strategy_name).first()
+        strategy_doc = StrategyDocument.find(StrategyDocument.name == strategy_name).first()
         if symbols is None:
             symbols = strategy_doc.symbols
         super(StrategyBuilder, self).__init__(position=strategy_doc.transaction_type, name=strategy_name,

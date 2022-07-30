@@ -1,30 +1,11 @@
 from flask_restful import Resource
 from flask import Response, request, jsonify
-from model import DeployStrategy, MongoEngineJSONEncoder
-
-
-# class DeploysResource(Resource):
-#     def get(self):
-#         Deploys = Deploy.query.all()
-#         return jsonify(Deploys)
-#
-#     def post(self):
-#         body = request.get_json()
-#         Deploys = Deploy.getDeployBySymbols(body['ids'])
-#
-#         return jsonify(list(Deploys))
-#
-#     def put(self, id):
-#         body = request.get_json()
-#         return {"This is a put request"}
-#
-#     def delete(self, id):
-#         Deploy.remove()
-
+from models.deploy_strategy import DeployStrategy
+from model import MongoEngineJSONEncoder
 
 class DeployStrategyResource(Resource):
     def get(self, user_id):
-        deployed_strategies = DeployStrategy.query.filter(DeployStrategy.user_id == user_id).first()
+        deployed_strategies = DeployStrategy.get(DeployStrategy.user_id == user_id)
         return jsonify({"message": "Deploys fetched", "strategies": deployed_strategies})
 
     def post(self):
@@ -34,7 +15,7 @@ class DeployStrategyResource(Resource):
         else:
             user_id = body['user_id']
 
-        deployed_strategies_object = DeployStrategy.query.filter(DeployStrategy.user_id == user_id).first()
+        deployed_strategies_object = DeployStrategy.get(DeployStrategy.user_id == user_id)
         if not deployed_strategies_object:
             deployed_strategies_object = DeployStrategy(user_id=user_id, strategy_ids=body['strategy_ids'])
         else:
@@ -43,12 +24,12 @@ class DeployStrategyResource(Resource):
             deployed_strategies['strategy_ids'].extend(temp_ids)
             MongoEngineJSONEncoder\
                 .json_to_object(deployed_strategies_object, deployed_strategies)
-        deployed_strategies_object.save()
+        DeployedStrategy.create(**deployed_strategies_object)
         return jsonify({"msg": "This is a post request"})
 
     def put(self, id):
         body = request.get_json()
         return {"This is a put request"}
 
-    # def delete(self, id):
-    #     Deploy.remove()
+    def delete(self, id):
+        DeployStrategy.remove(id)

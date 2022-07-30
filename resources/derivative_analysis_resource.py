@@ -2,7 +2,8 @@ import math
 
 from flask_restful import Resource
 from flask import Response, request, jsonify
-from model import pmdb, DerivativeAnalysisResult, MongoEngineJSONEncoder
+from model import pmdb, MongoEngineJSONEncoder
+from models.derivative_analysis_result import DerivativeAnalysisResult
 import pandas as pd
 
 from utils import utilities
