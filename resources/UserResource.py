@@ -2,6 +2,7 @@ from flask.json import jsonify
 from flask_restful import Resource
 from flask import Response, request
 from models.user import User
+from authentication.login import Authenticate
 
 
 class UserResource(Resource):
@@ -10,8 +11,12 @@ class UserResource(Resource):
         return jsonify({"message": "Algorithm executed", "users": user})
     
     def post(self):
-        result = UserFundMargin.create(user_id="abc", equity=10000, commodity=15000)
-        # return {"I got your post request"}
+        data = request.get_json()
+        condition = {}
+        condition['user_id'] = data['user_id']
+        condition['broker'] = data['broker']
+        result = User.upsert(condition, **data)
+        return jsonify(result)
     
     def algo_setup(self):
         return {"I got your algo setup request"}

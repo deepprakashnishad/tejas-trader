@@ -1,7 +1,3 @@
-import sys
-sys.path.insert(0, '/.../KiteAutoTrader')
-sys.path.insert(0, '/.../KiteAutoTrader/core')
-
 import math
 
 from nsepy import get_history, derivatives, history
@@ -9,13 +5,17 @@ from datetime import date, datetime, timedelta
 import pandas as pd
 from nsepy.commons import unzip_str
 from nsepy.urls import URLFetchSession
-from requests.packages.urllib3.packages import six
-from option_chain_analyzer import OptionChainAnalyzer as oca
+# from requests.packages.urllib3.packages import six
+
 import model as md
 import requests
 from termcolor import colored
 
 from utils import my_constants
+
+import sys
+sys.path.append('..')
+from core.option_chain_analyzer import OptionChainAnalyzer as oca
 
 position_priority_dict = {
     "Not Decided": 0,
@@ -233,8 +233,8 @@ def get_derivativeprice_list(dt, price_type="fo"):
     else:
         res = derivative_price_list_url(yyyy, MMM, dt.strftime("%d%b%Y").upper())
         txt = unzip_str(res.content)
-    fp = six.StringIO(txt)
-    df = pd.read_csv(fp)
+    # fp = six.StringIO(txt)
+    df = pd.read_csv(txt)
     return df
 
 

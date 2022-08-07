@@ -19,6 +19,7 @@ class BaseDocument:
   @classmethod
   def validate_schema(cls, params):
     try:
+      print(params)
       schema = cls.meta.get("schema")
       return schema().load(params)
     except marshmallow.exceptions.ValidationError as error:
@@ -62,6 +63,13 @@ class BaseDocument:
 
     result = cls.get_collection().update_one({"_id": ObjectId(id)}, {"$set": updated_doc})
     return cls.get(id=id) if result.acknowledged else None
+  
+  @classmethod
+  def upsert(cls, condition, **kwargs):
+    updated_doc = cls.validate_schema(kwargs)
+
+    result = cls.get_collection().update_one(condition, {"$set": updated_doc}, **{"upsert": True})
+    return cls.get(**condition) if result.acknowledged else None
       
   @classmethod
   def delete(cls, id):

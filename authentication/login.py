@@ -4,8 +4,9 @@ import webbrowser
 from datetime import timedelta
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from kiteconnect import KiteConnect
+from kiteconnect.exceptions import TokenException
 from brokers.zerodha_broker import ZerodhaBroker
-from model import User
+from models.user import User
 from utils import my_constants as mconst
 import browserhistory
 import urllib.parse as urlparse
@@ -18,35 +19,9 @@ def wait_for_request(server_class=HTTPServer, handler_class=BaseHTTPRequestHandl
     return httpd.handle_request()
 
 
-def save_user(data):
-    user = User.query.filter(User.user_id == data['user_id']).first()
-    if user is not None:
-        user.remove()
-
-    if data['avatar_url'] is None:
-        avatar_url = ""
-    else:
-        avatar_url = data['avatar_url']
-    User(
-        user_id=data['user_id'],
-        user_name=data['user_name'],
-        user_shortname=data['user_shortname'],
-        broker=data['broker'],
-        email=data['email'],
-        user_type=data['user_type'],
-        exchanges=data['exchanges'],
-        products=data['products'],
-        access_token=data['access_token'],
-        public_token=data['public_token'],
-        login_time=data['login_time'],
-        avatar_url=avatar_url,
-        access_token_expiry=data['login_time'] + timedelta(hours=12)
-    ).save()
-
-
 class Authenticate(ZerodhaBroker):
 
-    def __init__(self, uid):
+    def __init__(self):
         # super().__init__(uid)
         self.kite = KiteConnect(api_key=mconst.API_KEY)
 
@@ -59,18 +34,20 @@ class Authenticate(ZerodhaBroker):
         # os.system("killall -9 'firefox'")
         # time.sleep(4)
         # browser_list = browserhistory.get_browserhistory()
+        # print(browser_list)
         # print(browser_list['firefox'][1][0])
         # request_token_url = browser_list['firefox'][1][0]
         # request_token = urlparse.parse_qs(urlparse.urlparse(request_token_url).query)['request_token'][0]
+        # print(f"Your Request Token: {request_token}")
         # return request_token
 
-    def get_access_token(self):
-        request_token = self.login()
-        request_token = input("[*] Enter your request token: ")
-        data = self.kite.generate_session(request_token, api_secret=mconst.API_SECRET)
-        save_user(data)
-        access_token = data["access_token"]
-        self.kite.set_access_token(access_token)
-        mconst.ACCESS_TOKEN = access_token
-        print(f"Your Access Token: {access_token}")
-        return access_token
+    def get_access_token(self,request_token):
+        try:
+            data = self.kite.generate_session(request_token, api_secret=mconst.API_SECRET)
+            access_token = data["access_token"]
+            del data['login_time']
+            self.kite.set_access_token(access_token)
+            mconst.ACCESS_TOKEN = access_token
+            return {"msg": "Login successful.", "status": True, "userdata": data }
+        except TokenException:
+            return {"msg": "Invalid token. Please login again.", "status": False}

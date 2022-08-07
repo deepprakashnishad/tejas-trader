@@ -1,7 +1,10 @@
-ENV = "PROD"
+ENV = "DEV"
 
-API_KEY = "veq0ga8pwbx9h5bf"
-API_SECRET = "sensihqgmjuynx0mxz6t7bjahzrew1t1"
+SIGNING_KEY="ab87ed58b2msh78f8c53185c415bp161123jsnff19e78ce6eb"
+SIGNING_ALGO = "HS256"
+
+API_KEY = "5za4lsjnw8rkesqm"
+API_SECRET = "73lr878npf01p45yzesfszyndsjwsu3j"
 AUTH_URL = f"https://kite.trade/connect/login?v=3&api_key={API_KEY}"
 ACCESS_TOKEN = ""
 UID = "DD1144"
