@@ -4,7 +4,7 @@ from datetime import timedelta, datetime
 from math import floor
 from core.dataseries import TimeFrame
 import pandas as pd
-
+import time
 
 class Feed(TimeFrame):
     live_feed_queue = multiprocessing.Queue()
@@ -20,6 +20,7 @@ class Feed(TimeFrame):
     fetch_batch_periods = 5000
     instruments = []
     tick_flag = False
+    last_updated_tick_flag_time = time.time()
 
     def fetch_and_load(self, symbol_id, timeframe, compression, is_direction_forward):
         pass

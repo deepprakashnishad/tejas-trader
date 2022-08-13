@@ -103,7 +103,7 @@ class Tejas:
         while True:
             if self.feed.tick_flag:
                 cnt = cnt + 1
-                print(f"Strategy Execution Loop {cnt}")
+                print(f"Running strategies - {cnt}")
                 for strategy in self._strategies:
                     self.run_strategy(strategy)
                 self.feed.tick_flag = False
@@ -209,18 +209,16 @@ class Tejas:
         complete_symbol_list = []
         for strategy in self._strategies:
             for symbol_id in strategy.symbol_ids:
-                print(symbol_id)
                 if symbol_id not in complete_symbol_list:
                     complete_symbol_list.append(symbol_id)
                 for condition in strategy.entry_conditions:
-                    if symbol_id in condition.symbol_ids_dict.keys() and\
+                    if condition.symbol_ids_dict is not None and symbol_id in condition.symbol_ids_dict.keys() and\
                             condition.symbol_ids_dict[symbol_id] not in complete_symbol_list:
                         complete_symbol_list.append(condition.symbol_ids_dict[symbol_id])
                 for condition in strategy.exit_conditions:
-                    if symbol_id in condition.symbol_ids_dict.keys() and\
+                    if condition.symbol_ids_dict is not None and  symbol_id in condition.symbol_ids_dict.keys() and\
                             condition.symbol_ids_dict[symbol_id] not in complete_symbol_list:
                         complete_symbol_list.append(condition.symbol_ids_dict[symbol_id])
-
         return complete_symbol_list
 
     def backtest(self):
@@ -327,7 +325,6 @@ class Tejas:
                 profit = self.broker.place_order(symbol_id, transaction_type, qty, **kwargs)
                 if profit is not None:
                     self.update_strategy_result(strategy.name, symbol_id, profit)
-
             return "TRADE_EXITED", "Trade exited"
         else:
             return "TEST_FAILED", "Exit condition not satisfied"

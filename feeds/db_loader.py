@@ -1,4 +1,4 @@
-from model import HistoricalData
+from models.historical_data import HistoricalData
 
 
 class DBLoader:

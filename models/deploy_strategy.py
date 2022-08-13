@@ -5,8 +5,10 @@ from base_document import BaseDocument
 from database import Database, ObjectId
 
 class DeployStrategySchema(Schema):
-    user_id = Str()
+    _id = Str()
     strategy_ids = Raw()
+    quantity=Int(default=1, allow_null=True)
+    
 
 class DeployStrategy(BaseDocument):
     db = Database().get_db()

@@ -15,19 +15,23 @@ from datetime import datetime
 
 
 def __main__():
-    # feed = ZerodhaFeed(broker=None)
-    feed = MongoFeed(broker=None)
-    tejas = Tejas(feed=feed, mode=TejasRunModes.BACKTEST, plot=True)
-    # broker = ZerodhaBroker(uid=mconst.UID)
-    broker = AlphaBroker()
+    feed = ZerodhaFeed(broker=None)
+    # feed = MongoFeed(broker=None)
+    tejas = Tejas(feed=feed, mode=TejasRunModes.LIVE, plot=True)
+    broker = ZerodhaBroker(uid=mconst.UID)
+    # broker = AlphaBroker()
     tejas.set_broker(broker)
     feed.set_broker(broker)
 
-    tejas.add_strategy(StrategyBuilder(feed, strategy_name="Test",
+    tejas.add_strategy(StrategyBuilder(feed, strategy_name="NR7 Buy",
                                        start_time=datetime(2020, 3, 1, 0, 0, tzinfo=tzoffset(None, 19800)),
                                        end_time=datetime(2020, 3, 12, 12, 9, tzinfo=tzoffset(None, 19800))))
 
     tejas.run()
+    
+    tejas.add_strategy(StrategyBuilder(feed, strategy_name="NR7 Short",
+                                       start_time=datetime(2020, 3, 1, 0, 0, tzinfo=tzoffset(None, 19800)),
+                                       end_time=datetime(2020, 3, 12, 12, 9, tzinfo=tzoffset(None, 19800))))
 
 
 # def __load_db__():

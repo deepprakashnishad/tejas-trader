@@ -151,7 +151,7 @@ class PreviousHigh(Technical):
 class PreviousLow(Technical):
     def __init__(self, feed, **kwargs):
         self.name = "Previous Low"
-        super(PreviousLow, self).__init__(feed, minimal_period=kwargs['minimal_period']+10)
+        super(PreviousLow, self).__init__(feed)
 
     def calculate_series(self, index, **kwargs):
         data = self.feed.data_dict[(self.symbol_id, self.timeframe, self.compression)]['low']

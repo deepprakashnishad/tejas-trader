@@ -1,4 +1,6 @@
-ENV = "DEV"
+ENV = "PROD"
+
+STRATEGY_EXEC_INTERVAL_IN_MILLISEC=60000
 
 SIGNING_KEY="ab87ed58b2msh78f8c53185c415bp161123jsnff19e78ce6eb"
 SIGNING_ALGO = "HS256"
@@ -7,7 +9,7 @@ API_KEY = "5za4lsjnw8rkesqm"
 API_SECRET = "73lr878npf01p45yzesfszyndsjwsu3j"
 AUTH_URL = f"https://kite.trade/connect/login?v=3&api_key={API_KEY}"
 ACCESS_TOKEN = ""
-UID = "DD1144"
+UID = "HN6243"
 MAXINT = 99999999
 ALPHA_KEY = "8O8PGS7VDPEHNS5A"
 ALPHA_URL = "https://www.alphavantage.co/"

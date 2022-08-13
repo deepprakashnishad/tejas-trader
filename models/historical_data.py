@@ -1,5 +1,5 @@
 from marshmallow import Schema, validate
-from marshmallow.fields import Str, , Boolean, Float, Int
+from marshmallow.fields import Str, Raw, Boolean, Float, Int, DateTime
 
 from base_document import BaseDocument
 from database import Database, ObjectId

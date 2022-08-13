@@ -38,6 +38,8 @@ class BaseDocument:
           ObjectId(kwargs.pop("id")) if type(kwargs["id"]) is str else kwargs.pop("id")
       )
     result = cls.get_collection().find_one(kwargs)
+    if result is None:
+      return None
     schema = cls.meta.get("schema")
     return schema().load(result) 
 
@@ -82,7 +84,7 @@ class BaseDocument:
       kwargs["_id"] = {"$in": ids}
     
     collection = cls.get_collection()
-    res = cls.get_collection().find()
+    res = cls.get_collection().find(kwargs)
     schema = cls.meta.get("schema")
     data = schema(many=True).load(res)
     return data

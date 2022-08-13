@@ -10,6 +10,7 @@ from resources.screener_resource import ScreenerResource, ScreenersResource
 from resources.strategy_resource import StrategyResource, StrategiesResource
 from resources.technical_resource import TechnicalResource, TechnicalsResource
 from resources.authentication_resource import AuthenticationResource
+from resources.seed_resource import SeedResource
 from resources.derivative_analysis_resource import DerivativeAnalysisResource, DetailedDerivativeAnalysisResource
 
 api_bp = Blueprint('api', __name__)
@@ -49,6 +50,8 @@ api.add_resource(DeployStrategyResource, '/deploy')
 api.add_resource(BacktestResource, '/backtest')
 
 api.add_resource(DerivativeAnalysisResource, '/derivativeAnalysisResult')
+
+api.add_resource(SeedResource, '/seed')
 
 api.add_resource(DetailedDerivativeAnalysisResource, '/detailDerivativeAnalysisResult/<string:stock>')
 

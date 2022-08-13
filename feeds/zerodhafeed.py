@@ -10,6 +10,7 @@ import pandas as pd
 from brokers.zerodha_broker import ZerodhaBroker
 from utils import my_constants as mconst
 import datetime
+import time
 
 
 class ZerodhaFeed(Feed):
@@ -128,16 +129,17 @@ class ZerodhaFeed(Feed):
         self.zerodha = broker
 
     def on_tick_recieved(self, ticks):
+        print("Tick recieved from zerodha live")
         timeframe = 4
         compression = 1
         total_minutes = TimeFrame.get_interval_in_minutes(timeframe, compression)
         for tick in ticks:
             symbol = tick['instrument_token']
-            if "timestamp" in tick.keys():
-                current_time = tick['timestamp']
+            if "exchange_timestamp" in tick.keys():
+                current_time = tick['exchange_timestamp']
                 current_time = self.mtimezone.localize(current_time)
             else:
-                current_time = datetime.now(tz=tzoffset(None, 19800))
+                current_time = datetime.datetime.now(tz=tzoffset(None, 19800))
 
             if symbol in self.tick_dict.keys() and \
                     self.tick_dict[symbol].loc(1)['date'][self.tick_dict[symbol].tail(1).index[-1]] \
@@ -150,29 +152,34 @@ class ZerodhaFeed(Feed):
 
                 df.iat[last_index, 4] = tick['ohlc']['close']
 
-                df.iat[last_index, 5] = tick['volume'] + self.tick_dict[symbol].loc(1)['volume'][last_index]
+                df.iat[last_index, 5] = (tick['volume_traded']  if tick.__contains__('volume_traded') else 0) + self.tick_dict[symbol].loc(1)['volume'][last_index]
 
-                df.iat[last_index, 6] = tick['oi']
+                df.iat[last_index, 6] = tick['oi'] if tick.__contains__('oi') else 0,
                 self.tick_dict[symbol] = df.copy(deep=True)
             else:
-                time = self.mtimezone.localize(tick['timestamp']).replace(
-                    minute=(floor(tick['timestamp'].minute)), second=0, microsecond=0)
+                mtime = self.mtimezone.localize(tick['exchange_timestamp']).replace(
+                    minute=(floor(tick['exchange_timestamp'].minute)), second=0, microsecond=0)
 
                 if symbol not in self.tick_dict.keys():
                     self.tick_dict[symbol] = pd.DataFrame(columns=[
                         "date", "open", "high", "low", "close", "volume", "oi"
                     ])
-
                 self.tick_dict[symbol] = self.tick_dict[symbol].append({
-                    "date": time,
+                    "date": mtime,
                     "open": tick['ohlc']['open'],
                     "high": tick['ohlc']['high'],
                     "low": tick['ohlc']['low'],
                     "close": tick['ohlc']['close'],
-                    "volume": tick['volume'],
-                    "oi": tick['oi']
+                    "volume": tick['volume_traded'] if tick.__contains__('volume_traded') else 0,
+                    "oi": tick['oi'] if tick.__contains__('oi') else 0
                 }, ignore_index=True)
-        self.tick_flag = True
+        
+        print(time.time())
+        print(self.last_updated_tick_flag_time)
+        if time.time() > self.last_updated_tick_flag_time+mconst.STRATEGY_EXEC_INTERVAL_IN_MILLISEC:
+            self.tick_flag = True
+            self.last_updated_tick_flag_time = time.time()
+            
         # self.live_feed_queue.put([1])
         # for tick in ticks:
         #     symbol = tick['instrument_token']

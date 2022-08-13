@@ -1,6 +1,6 @@
 import time
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 import kiteconnect
 from dateutil.tz import tzoffset
@@ -9,7 +9,8 @@ from brokers.broker import Broker
 from core.tejas import Tejas
 from feeds.feed import Feed
 from utils import my_constants as mconst
-from model import *
+from utils.utilities import dotdict
+from models.user import User
 from pandas import json_normalize
 
 kite = None
@@ -29,9 +30,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 38),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 38),
         }
     ],
     [
@@ -47,9 +48,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 42.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 39),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 39),
         }
     ],
     [
@@ -65,9 +66,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 40),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 40),
         }
     ],
     [
@@ -83,9 +84,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.9, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 41),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 41),
         }
     ],
     [
@@ -101,9 +102,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 18.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 42),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 42),
         }
     ],
     [
@@ -119,9 +120,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 43),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 43),
         }
     ],
     [
@@ -137,9 +138,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 44),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 44),
         }
     ],
     [
@@ -155,9 +156,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 14.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 45),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 45),
         }
     ],
     [
@@ -173,9 +174,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 46),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 46),
         }
     ],
     [
@@ -191,9 +192,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 35.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 47),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 47),
         }
     ],
     [
@@ -209,9 +210,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 48),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 48),
         }
     ],
     [
@@ -227,9 +228,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 49),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 49),
         }
     ],
     [
@@ -245,9 +246,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 50),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 50),
         }
     ],
     [
@@ -263,9 +264,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 51),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 51),
         }
     ],
     [
@@ -281,9 +282,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 52),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 52),
         }
     ],
     [
@@ -299,9 +300,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 53),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 53),
         }
     ],
     [
@@ -317,9 +318,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 54),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 54),
         }
     ],
     [
@@ -335,9 +336,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 38, 55),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 38, 55),
         }
     ],
     [
@@ -353,9 +354,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 56),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 56),
         }
     ],
     [
@@ -371,9 +372,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 57),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 57),
         }
     ],
     [
@@ -389,9 +390,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 58),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 58),
         }
     ],
     [
@@ -407,9 +408,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 20.3, 'high': 31.7, 'low': 23.0, 'close': 32.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 59),
+            'timestamp': datetime(2020, 3, 13, 18, 20, 59),
         }
     ],
     [
@@ -425,9 +426,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 21.3, 'high': 41.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 1)
+            'timestamp': datetime(2020, 3, 13, 18, 21, 1)
         }
     ],
     [
@@ -443,9 +444,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 2),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 2),
         }
     ],
     [
@@ -461,9 +462,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 3),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 3),
         }
     ],
     [
@@ -479,9 +480,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 10.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 5),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 5),
         }
     ],
     [
@@ -497,9 +498,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 6),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 6),
         }
     ],
     [
@@ -515,9 +516,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 8),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 8),
         }
     ],
     [
@@ -533,9 +534,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 9),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 9),
         }
     ],
     [
@@ -551,9 +552,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 11),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 11),
         }
     ],
     [
@@ -569,9 +570,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 12),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 12),
         }
     ],
     [
@@ -587,9 +588,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 13),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 13),
         }
     ],
     [
@@ -605,9 +606,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 14),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 14),
         }
     ],
     [
@@ -623,9 +624,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 15),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 15),
         }
     ],
     [
@@ -641,9 +642,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 16),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 16),
         }
     ],
     [
@@ -659,9 +660,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 18),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 18),
         }
     ],
     [
@@ -677,9 +678,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 20),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 20),
         }
     ],
     [
@@ -695,9 +696,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 23),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 23),
         }
     ],
     [
@@ -713,9 +714,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 24),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 24),
         }
     ],
     [
@@ -731,9 +732,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 25),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 25),
         }
     ],
     [
@@ -749,9 +750,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 28),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 28),
         }
     ],
     [
@@ -767,9 +768,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 29),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 29),
         }
     ],
     [
@@ -785,9 +786,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 33),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 33),
         }
     ],
     [
@@ -803,9 +804,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 35),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 35),
         }
     ],
     [
@@ -821,9 +822,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 37),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 37),
         }
     ],
     [
@@ -839,9 +840,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 39),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 39),
         }
     ],
     [
@@ -857,9 +858,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 42),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 42),
         }
     ],
     [
@@ -875,9 +876,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 45),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 45),
         }
     ],
     [
@@ -893,9 +894,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 48),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 48),
         }
     ],
     [
@@ -911,9 +912,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 50),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 50),
         }
     ],
     [
@@ -929,9 +930,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 55),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 55),
         }
     ],
     [
@@ -947,9 +948,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 58),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 58),
         }
     ],
     [
@@ -965,9 +966,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 37.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 21, 59),
+            'timestamp': datetime(2020, 3, 13, 18, 21, 59),
         }
     ],
     [
@@ -983,9 +984,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 35.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 22, 00),
+            'timestamp': datetime(2020, 3, 13, 18, 22, 00),
         }
     ],
     [
@@ -1001,9 +1002,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 22, 15),
+            'timestamp': datetime(2020, 3, 13, 18, 22, 15),
         }
     ],
     [
@@ -1019,9 +1020,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 22, 30),
+            'timestamp': datetime(2020, 3, 13, 18, 22, 30),
         }
     ],
     [
@@ -1037,9 +1038,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 22, 45),
+            'timestamp': datetime(2020, 3, 13, 18, 22, 45),
         }
     ],
     [
@@ -1055,9 +1056,9 @@ data = [
             'sell_quantity': 0,
             'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
             'change': 2.1452145214521403,
-            'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+            'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
             'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-            'timestamp': datetime.datetime(2020, 3, 13, 18, 23, 1),
+            'timestamp': datetime(2020, 3, 13, 18, 23, 1),
         }
     ]
 ]
@@ -1071,19 +1072,21 @@ class ZerodhaBroker(Broker):
         from authentication.login import Authenticate
         self.kite = kiteconnect.KiteConnect(api_key=mconst.API_KEY)
         self.instrument_tokens = instrument_tokens
-        user = User.query.filter(User.user_id == uid).first()
-        if user is None or user.access_token_expiry <= datetime.datetime.now():
+        user = User.get(**{"user_id":uid})
+        user = dotdict(user)
+        if user is None:
             authenticate = Authenticate(uid=uid)
             access_token = authenticate.get_access_token()
             self.kite.set_access_token(access_token=access_token)
-            user = User.query.filter(User.user_id == uid).first()
+            user = User.get(**{"user_id":uid})
+            user = dotdict(user)
         else:
             self.kite.set_access_token(user.access_token)
 
         self.kws = kiteconnect.KiteTicker(
             api_key=mconst.API_KEY, access_token=user.access_token,
             reconnect_max_tries=250, reconnect_max_delay=5, debug=False)
-        self.symbol_token_dict = {4451329: 'ADANIPOWER', 3050241: 'YESBANK', 3677697: 'IDEA'}
+        # self.symbol_token_dict = {4451329: 'ADANIPOWER', 3050241: 'YESBANK', 3677697: 'IDEA'}
         self.e = None
         # self.udpate_trading_symbol_dict(instrument_tokens)
 
@@ -1170,7 +1173,7 @@ class ZerodhaBroker(Broker):
 
     def on_ticks(self, ws, ticks):
         # Callback to receive ticks.
-        print("Ticks recieved")
+        print("Ticks recieved from zerodha live")
         logging.debug("Ticks: {}".format(ticks))
         self.feed.on_tick_recieved(ticks)
 
@@ -1198,7 +1201,6 @@ class ZerodhaBroker(Broker):
         return self.symbol_token_dict[token]
 
     def udpate_trading_symbol_dict(self, instrument_tokens):
-        # instrument_obj = Instrument.query.filter(Instrument.instrument_token != -1).
         instrument_obj = self.kite.instruments(self.exchange)
         df = json_normalize(instrument_obj)
         for token in instrument_tokens:
@@ -1228,18 +1230,18 @@ class ZerodhaBroker(Broker):
                 'sell_quantity': 0,
                 'ohlc': {'open': 27.3, 'high': 31.7, 'low': 23.0, 'close': 30.3},
                 'change': 2.1452145214521403,
-                'last_trade_time': datetime.datetime(2020, 3, 13, 15, 53, 8),
+                'last_trade_time': datetime(2020, 3, 13, 15, 53, 8),
                 'oi': 0, 'oi_day_high': 0, 'oi_day_low': 0,
-                'timestamp': datetime.datetime(2020, 3, 13, 18, 20, 38),
+                'timestamp': datetime(2020, 3, 13, 18, 20, 38),
             }
         ]
         min = 40
         max = 50
-        last_ts = datetime.datetime.now()
+        last_ts = datetime.now()
         from random import random, randint
         while True:
             time.sleep(1)
-            last_ts = last_ts + datetime.timedelta(seconds=1)
+            last_ts = last_ts + timedelta(seconds=1)
             mopen = min + (random() * (max - min))
             high = max + (max - min) + (random() * (max - min))
             low = min - (max - min) + (random() * (max - min))
@@ -1252,4 +1254,4 @@ class ZerodhaBroker(Broker):
             data[0]['ohlc']['high'] = high
             data[0]['timestamp'] = last_ts
             self.feed.on_tick_recieved(data)
-            print(f"Tick processed at {last_ts}")
+            print(f"Tick processed at {last_ts} from sample tick generator")

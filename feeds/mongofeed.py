@@ -11,7 +11,7 @@ from core.tejas import Tejas
 from feeds.feed import Feed
 import pandas as pd
 
-from model import HistoricalData
+from models.historical_data import HistoricalData
 
 
 class MongoFeed(Feed):
