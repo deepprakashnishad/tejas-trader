@@ -2,7 +2,6 @@ from flask.json import jsonify
 from flask_restful import Resource
 from flask import Response, request
 from models.user import User
-from authentication.login import Authenticate
 
 
 class UserResource(Resource):

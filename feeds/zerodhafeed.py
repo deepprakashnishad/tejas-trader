@@ -129,7 +129,7 @@ class ZerodhaFeed(Feed):
         self.zerodha = broker
 
     def on_tick_recieved(self, ticks):
-        print("Tick recieved from zerodha live")
+        # print("Tick recieved from zerodha live")
         timeframe = 4
         compression = 1
         total_minutes = TimeFrame.get_interval_in_minutes(timeframe, compression)

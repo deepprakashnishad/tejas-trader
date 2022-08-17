@@ -19,7 +19,6 @@ api_bp = Blueprint('api', __name__)
 def index():
  return render_template('index.html')
 
-
 api = Api(api_bp)
 
 # Route

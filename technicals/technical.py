@@ -197,7 +197,6 @@ class DayFirstCandle(Technical):
         print(time_series[i-1])
         return data[self.field][i-1]
 
-
 class Range(Technical):
     def __init__(self, feed, **kwargs):
         super(Range, self).__init__(feed)

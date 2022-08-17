@@ -45,7 +45,6 @@ class Authenticate(ZerodhaBroker):
         try:
             data = self.kite.generate_session(request_token, api_secret=mconst.API_SECRET)
             access_token = data["access_token"]
-            del data['login_time']
             self.kite.set_access_token(access_token)
             mconst.ACCESS_TOKEN = access_token
             return {"msg": "Login successful.", "status": True, "userdata": data }

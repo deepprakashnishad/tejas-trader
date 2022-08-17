@@ -100,7 +100,8 @@ class Tejas:
     def run_strategies(self):
         # e.wait()
         cnt = 0
-        while True:
+        while stop_threads is False:
+            print(stop_threads)
             if self.feed.tick_flag:
                 cnt = cnt + 1
                 print(f"Running strategies - {cnt}")
@@ -108,7 +109,7 @@ class Tejas:
                     self.run_strategy(strategy)
                 self.feed.tick_flag = False
             else:
-                time.sleep(0.8)
+                time.sleep(5)
         # pool_size = multiprocessing.cpu_count() - 1
         # print(f"Pool size - {pool_size}")
         # with multiprocessing.Pool(pool_size) as pool:

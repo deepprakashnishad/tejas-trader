@@ -4,7 +4,6 @@ from flask import Response, request, jsonify
 from brokers.test_broker import TestBroker
 from core.tejas import Tejas
 from core.tejas_run_modes import TejasRunModes
-from feeds.zerodhafeed import ZerodhaFeed
 from strategies.strategy_builder import StrategyBuilder
 
 

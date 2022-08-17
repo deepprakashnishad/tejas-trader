@@ -10,12 +10,12 @@ from utils.utilities import dotdict
 
 class StrategyBuilder(Strategy):
 
-    def __init__(self, feed, strategy_name, symbols=None, start_time=None, end_time=None):
-        strategy_doc = StrategyDocument.get(**{"name":strategy_name})
+    def __init__(self, feed, strategy_id, symbols=None, start_time=None, end_time=None):
+        strategy_doc = StrategyDocument.get(**{"id":strategy_id})
         strategy_doc = dotdict(strategy_doc)
         if symbols is None:
             symbols = strategy_doc.symbols
-        super(StrategyBuilder, self).__init__(position=strategy_doc.transaction_type, name=strategy_name,
+        super(StrategyBuilder, self).__init__(position=strategy_doc.transaction_type, name=strategy_doc.name,
                                               start_time=start_time, end_time=end_time,
                                               symbol_ids=symbols, timeframe=strategy_doc.timeframe,
                                               compression=strategy_doc.compression, feed=feed)

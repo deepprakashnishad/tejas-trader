@@ -9,7 +9,7 @@ from brokers.broker import Broker
 from core.tejas import Tejas
 from feeds.feed import Feed
 from utils import my_constants as mconst
-from utils.utilities import dotdict
+from utils.utilities import dotdict, is_access_token_valid
 from models.user import User
 from pandas import json_normalize
 
@@ -1069,26 +1069,33 @@ class ZerodhaBroker(Broker):
 
     def __init__(self, uid, instrument_tokens=[], exchange="NSE"):
         super(ZerodhaBroker, self).__init__(brokername="Zerodha", exchange=exchange)
-        from authentication.login import Authenticate
-        self.kite = kiteconnect.KiteConnect(api_key=mconst.API_KEY)
-        self.instrument_tokens = instrument_tokens
-        user = User.get(**{"user_id":uid})
-        user = dotdict(user)
-        if user is None:
-            authenticate = Authenticate(uid=uid)
-            access_token = authenticate.get_access_token()
-            self.kite.set_access_token(access_token=access_token)
+        try:
+            self.kite = kiteconnect.KiteConnect(api_key=mconst.API_KEY)
+            self.instrument_tokens = instrument_tokens
             user = User.get(**{"user_id":uid})
             user = dotdict(user)
-        else:
-            self.kite.set_access_token(user.access_token)
+            is_token_valid = is_access_token_valid(user.login_time)
+            print(f"Is token valid - {is_token_valid}")
+            if user is not None and is_token_valid:
+                self.kite.set_access_token(user.access_token)
+            else:
+                return None
 
+            self.kws = kiteconnect.KiteTicker(
+                api_key=mconst.API_KEY, access_token=user.access_token,
+                reconnect_max_tries=250, reconnect_max_delay=5, debug=False)
+            # self.symbol_token_dict = {4451329: 'ADANIPOWER', 3050241: 'YESBANK', 3677697: 'IDEA'}
+            self.e = None
+        except:
+            print("Exception occured")
+            return None
+        # self.udpate_trading_symbol_dict(instrument_tokens)
+
+    def reinitiate_kite():
+        self.kite.set_access_token(user.access_token)
         self.kws = kiteconnect.KiteTicker(
             api_key=mconst.API_KEY, access_token=user.access_token,
             reconnect_max_tries=250, reconnect_max_delay=5, debug=False)
-        # self.symbol_token_dict = {4451329: 'ADANIPOWER', 3050241: 'YESBANK', 3677697: 'IDEA'}
-        self.e = None
-        # self.udpate_trading_symbol_dict(instrument_tokens)
 
     def check_order_position_holding_exists(self, instrument_token, qty=1, types=None):
         if types is None:
