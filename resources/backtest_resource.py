@@ -17,7 +17,7 @@ class BacktestResource(Resource):
             user_id = body['user_id']
 
         # feed = ZerodhaFeed(broker=None)
-        tejas = Tejas(feed=feed, mode=TejasRunModes.LIVE, plot=True)
+        tejas = Tejas(feed=feed, mode=TejasRunModes.BACKTEST, plot=True)
         # broker = ZerodhaBroker(uid=mconst.UID)
         broker = TestBroker()
         tejas.set_broker(broker)

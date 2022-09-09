@@ -7,9 +7,7 @@ import pandas as pd
 import time
 
 class Feed(TimeFrame):
-    live_feed_queue = multiprocessing.Queue()
     e: threading.Event
-    tick_dict = multiprocessing.Manager().dict()
     data_dict = {}
     last_ts = {}
     timeframe = 4
@@ -21,6 +19,10 @@ class Feed(TimeFrame):
     instruments = []
     tick_flag = False
     last_updated_tick_flag_time = time.time()
+
+    def __init__(self, broker=None):
+        self.tick_dict = multiprocessing.Manager().dict()
+        self.live_feed_queue = multiprocessing.Queue()
 
     def fetch_and_load(self, symbol_id, timeframe, compression, is_direction_forward):
         pass
