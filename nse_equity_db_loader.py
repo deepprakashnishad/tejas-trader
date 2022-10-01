@@ -13,23 +13,23 @@ eq_price_delivery_list_url = URLFetchSession(
     url='https://archives.nseindia.com/products/content/sec_bhavdata_full_%s.csv'
 )
 
-stocks = ["ACC"]
+# stocks = ["ACC"]
 
-# stocks = ["ACC", "ADANIENT", "ADANIPORTS", "ADANIPOWER", "AMARAJABAT", "AMBUJACEM", "APOLLOHOSP", "APOLLOTYRE",
-#           "ASHOKLEY", "ASIANPAINT", "AUROPHARMA", "AXISBANK", "BAJAJ-AUTO", "BAJAJFINSV", "BAJFINANCE", "BALKRISIND",
-#           "BANDHANBNK", "BANKBARODA", "BATAINDIA", "BEL", "BERGEPAINT", "BHARATFORG", "BHARTIARTL", "BHEL", "BIOCON",
-#           "BOSCHLTD", "BPCL", "BRITANNIA", "CADILAHC", "CANBK", "CENTURYTEX", "CESC", "CHOLAFIN", "CIPLA", "COALINDIA",
-#           "COLPAL", "CONCOR", "CUMMINSIND", "DABUR", "DIVISLAB", "DLF", "DRREDDY", "EICHERMOT", "EQUITAS", "ESCORTS",
-#           "EXIDEIND", "FEDERALBNK", "GAIL", "GLENMARK", "GMRINFRA", "GODREJCP", "GODREJPROP", "GRASIM", "HAVELLS",
-#           "HCLTECH", "HDFC", "HDFCBANK", "HDFCLIFE", "HEROMOTOCO", "HINDALCO", "HINDPETRO", "HINDUNILVR", "IBULHSGFIN",
-#           "ICICIBANK", "ICICIPRULI", "IDEA", "IDFCFIRSTB", "IGL", "INDIGO", "INDUSINDBK", "INFRATEL", "INFY", "IOC",
-#           "ITC", "JINDALSTEL", "JSWSTEEL", "JUBLFOOD", "JUSTDIAL", "KOTAKBANK", "L&TFH", "LICHSGFIN", "LT", "LUPIN",
-#           "M&M", "M&MFIN", "MANAPPURAM", "MARICO", "MARUTI", "MCDOWELL-N", "MFSL", "MGL", "MINDTREE", "MOTHERSUMI",
-#           "MRF", "MUTHOOTFIN", "NATIONALUM", "NAUKRI", "NCC", "NESTLEIND", "NIITTECH", "NMDC", "NTPC", "ONGC",
-#           "PAGEIND", "PEL", "PETRONET", "PFC", "PIDILITIND", "PNB", "POWERGRID", "PVR", "RAMCOCEM", "RBLBANK", "RECLTD",
-#           "RELIANCE", "SAIL", "SBIN", "SHREECEM", "SIEMENS", "SRF", "SRTRANSFIN", "SUNPHARMA", "SUNTV", "TATACHEM",
-#           "TATACONSUM", "TATAMOTORS", "TATAPOWER", "TATASTEEL", "TCS", "TECHM", "TITAN", "TORNTPHARM", "TORNTPOWER",
-#           "TVSMOTOR", "UBL", "UJJIVAN", "ULTRACEMCO", "UPL", "VEDL", "VOLTAS", "WIPRO", "YESBANK", "ZEEL"]
+stocks = ["ACC", "ADANIENT", "ADANIPORTS", "ADANIPOWER", "AMARAJABAT", "AMBUJACEM", "APOLLOHOSP", "APOLLOTYRE",
+          "ASHOKLEY", "ASIANPAINT", "AUROPHARMA", "AXISBANK", "BAJAJ-AUTO", "BAJAJFINSV", "BAJFINANCE", "BALKRISIND",
+          "BANDHANBNK", "BANKBARODA", "BATAINDIA", "BEL", "BERGEPAINT", "BHARATFORG", "BHARTIARTL", "BHEL", "BIOCON",
+          "BOSCHLTD", "BPCL", "BRITANNIA", "CADILAHC", "CANBK", "CENTURYTEX", "CESC", "CHOLAFIN", "CIPLA", "COALINDIA",
+          "COLPAL", "CONCOR", "CUMMINSIND", "DABUR", "DIVISLAB", "DLF", "DRREDDY", "EICHERMOT", "EQUITAS", "ESCORTS",
+          "EXIDEIND", "FEDERALBNK", "GAIL", "GLENMARK", "GMRINFRA", "GODREJCP", "GODREJPROP", "GRASIM", "HAVELLS",
+          "HCLTECH", "HDFC", "HDFCBANK", "HDFCLIFE", "HEROMOTOCO", "HINDALCO", "HINDPETRO", "HINDUNILVR", "IBULHSGFIN",
+          "ICICIBANK", "ICICIPRULI", "IDEA", "IDFCFIRSTB", "IGL", "INDIGO", "INDUSINDBK", "INFRATEL", "INFY", "IOC",
+          "ITC", "JINDALSTEL", "JSWSTEEL", "JUBLFOOD", "JUSTDIAL", "KOTAKBANK", "L&TFH", "LICHSGFIN", "LT", "LUPIN",
+          "M&M", "M&MFIN", "MANAPPURAM", "MARICO", "MARUTI", "MCDOWELL-N", "MFSL", "MGL", "MINDTREE", "MOTHERSUMI",
+          "MRF", "MUTHOOTFIN", "NATIONALUM", "NAUKRI", "NCC", "NESTLEIND", "NIITTECH", "NMDC", "NTPC", "ONGC",
+          "PAGEIND", "PEL", "PETRONET", "PFC", "PIDILITIND", "PNB", "POWERGRID", "PVR", "RAMCOCEM", "RBLBANK", "RECLTD",
+          "RELIANCE", "SAIL", "SBIN", "SHREECEM", "SIEMENS", "SRF", "SRTRANSFIN", "SUNPHARMA", "SUNTV", "TATACHEM",
+          "TATACONSUM", "TATAMOTORS", "TATAPOWER", "TATASTEEL", "TCS", "TECHM", "TITAN", "TORNTPHARM", "TORNTPOWER",
+          "TVSMOTOR", "UBL", "UJJIVAN", "ULTRACEMCO", "UPL", "VEDL", "VOLTAS", "WIPRO", "YESBANK", "ZEEL"]
 
 
 def fetch_historical_stock_data(stock, start_date, end_date=datetime.now()):
@@ -78,7 +78,7 @@ def get_dates_to_fetch(stock):
         elif s_date.strftime("%A") == "Sunday":
             s_date = result[0]['datetime'] + timedelta(days=1)
     else:
-        s_date = datetime.now() - timedelta(days=100)
+        s_date = datetime.now() - timedelta(days=60)
         data_exists = False
     return s_date, datetime.now(), data_exists
 
@@ -184,46 +184,46 @@ def load_daily_bhav_copy():
 # 3. If it exist then check the last date and fill the data if some days are missing
 # 4. If data is full then check for bhavcopy and update it in database
 
-print("Loading data")
-for stock in stocks:
-    print("Processing - " + stock)
-    s_date, e_date, data_exists = get_dates_to_fetch(stock)
-    try:
-        if s_date < datetime.now().replace(hour=0, minute=0, second=0, microsecond=0):
-            if not data_exists:
-                load_initial_data(stock, s_date, e_date)
+def equity_loader_main():
+    for stock in stocks:
+        print("Processing - " + stock)
+        s_date, e_date, data_exists = get_dates_to_fetch(stock)
+        try:
+            if s_date < datetime.now().replace(hour=0, minute=0, second=0, microsecond=0):
+                if not data_exists:
+                    load_initial_data(stock, s_date, e_date)
+                else:
+                    prepare_left_historical_data(stock, s_date=s_date, e_date=e_date)
             else:
-                prepare_left_historical_data(stock, s_date=s_date, e_date=e_date)
-        else:
-            print("Data upto date for stock - "+stock)
-    except Exception as ex:
-        print(ex)
-        print("Error occured for " + stock)
+                print("Data upto date for stock - "+stock)
+        except Exception as ex:
+            print(ex)
+            print("Error occured for " + stock)
 
-# bhavcopy = load_daily_bhav_copy()
-# bhavcopy['datetime'] = pd.to_datetime(bhavcopy['datetime'], format="%d-%b-%Y")
-# bhavcopy = bhavcopy[bhavcopy.stock.isin(stocks)]
-# bhavcopy.reset_index(inplace=True, drop=True)
-# results = get_mongo_data()
-# db_stock_list = []
-# print("Processing bhavcopy")
-# for result in results:
-#     db_stock_list.append(result['stock'])
-#     try:
-#         if result['datetime'] >= bhavcopy['datetime'][0]:
-#             bhavcopy = bhavcopy[bhavcopy.stock != result['stock']]
-#             bhavcopy.reset_index(inplace=True, drop=True)
-#         else:
-#             bhavcopy = prepare_daily_final_data(df=bhavcopy, stock_data=result)
-#         print("bhavcopy updated for "+result['stock'])
-#     except Exception as e:
-#         print(e)
-#         print("Error occured while processing bhavcopy for " + result['stock'])
-#
-# bhavcopy = bhavcopy[bhavcopy.stock.isin(db_stock_list)]
-# bhavcopy.reset_index(inplace=True, drop=True)
-# if bhavcopy.shape[0] > 0:
-#     md.pmdb['HistoricalData'].insert_many(bhavcopy.to_dict('records'))
-#     print("Data updated successfully")
-# else:
-#     print("No new data available in bhavcopy")
+    bhavcopy = load_daily_bhav_copy()
+    bhavcopy['datetime'] = pd.to_datetime(bhavcopy['datetime'], format="%d-%b-%Y")
+    bhavcopy = bhavcopy[bhavcopy.stock.isin(stocks)]
+    bhavcopy.reset_index(inplace=True, drop=True)
+    results = get_mongo_data()
+    db_stock_list = []
+    print("Processing bhavcopy")
+    for result in results:
+        db_stock_list.append(result['stock'])
+        try:
+            if result['datetime'] >= bhavcopy['datetime'][0]:
+                bhavcopy = bhavcopy[bhavcopy.stock != result['stock']]
+                bhavcopy.reset_index(inplace=True, drop=True)
+            else:
+                bhavcopy = prepare_daily_final_data(df=bhavcopy, stock_data=result)
+            print("bhavcopy updated for "+result['stock'])
+        except Exception as e:
+            print(e)
+            print("Error occured while processing bhavcopy for " + result['stock'])
+
+    bhavcopy = bhavcopy[bhavcopy.stock.isin(db_stock_list)]
+    bhavcopy.reset_index(inplace=True, drop=True)
+    if bhavcopy.shape[0] > 0:
+        md.pmdb['HistoricalData'].insert_many(bhavcopy.to_dict('records'))
+        print("Data updated successfully")
+    else:
+        print("No new data available in bhavcopy")

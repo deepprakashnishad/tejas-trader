@@ -6,8 +6,11 @@ import pandas as pd
 from nsepy.commons import unzip_str
 from nsepy.urls import URLFetchSession
 # from requests.packages.urllib3.packages import six
+from models.derivative_analysis_result import DerivativeAnalysisResult
+from models.option_data import OptionData
+from models.expiry_dates import ExpiryDates
+from io import StringIO
 
-import model as md
 import requests
 from termcolor import colored
 
@@ -38,6 +41,8 @@ position_priority_dict = {
     "No Interest": 15
 }
 
+baseurl = "https://www.nseindia.com/"
+
 derivative_price_list_url = URLFetchSession(
     url='https://archives.nseindia.com/content/historical/DERIVATIVES/%s/%s/fo%sbhav.csv.zip'
 )
@@ -49,25 +54,24 @@ eq_price_delivery_list_url = URLFetchSession(
 oi_date = datetime.now()
 index_bhav_copy = pd.DataFrame()
 
-# stocks = ["BANDHANBNK"]
+stocks = ["BANDHANBNK"]
 
-stocks = ["ACC", "ADANIENT", "ADANIPORTS", "AMARAJABAT", "AMBUJACEM", "APOLLOHOSP", "APOLLOTYRE",
-          "ASHOKLEY", "ASIANPAINT", "AUROPHARMA", "AXISBANK", "BAJAJ-AUTO", "BAJAJFINSV", "BAJFINANCE", "BALKRISIND",
-          "BANDHANBNK", "BANKBARODA", "BATAINDIA", "BEL", "BERGEPAINT", "BHARATFORG", "BHARTIARTL", "BHEL", "BIOCON",
-          "BPCL", "BRITANNIA", "CADILAHC", "CANBK", "CENTURYTEX", "CHOLAFIN", "CIPLA", "COALINDIA",
-          "COLPAL", "CONCOR", "CUMMINSIND", "DABUR", "DIVISLAB", "DLF", "DRREDDY", "EICHERMOT", "EQUITAS", "ESCORTS",
-          "EXIDEIND", "FEDERALBNK", "GAIL", "GLENMARK", "GMRINFRA", "GODREJCP", "GODREJPROP", "GRASIM", "HAVELLS",
-          "HCLTECH", "HDFC", "HDFCBANK", "HDFCLIFE", "HEROMOTOCO", "HINDALCO", "HINDPETRO", "HINDUNILVR", "IBULHSGFIN",
-          "ICICIBANK", "ICICIPRULI", "IDEA", "IDFCFIRSTB", "IGL", "INDIGO", "INDUSINDBK", "INFRATEL", "INFY", "IOC",
-          "ITC", "JINDALSTEL", "JSWSTEEL", "JUBLFOOD", "KOTAKBANK", "L&TFH", "LICHSGFIN", "LT", "LUPIN",
-          "M&M", "M&MFIN", "MANAPPURAM", "MARICO", "MARUTI", "MCDOWELL-N", "MFSL", "MGL", "MINDTREE", "MOTHERSUMI",
-          "MUTHOOTFIN", "NATIONALUM", "NAUKRI", "NESTLEIND", "NIITTECH", "NMDC", "NTPC", "ONGC",
-          "PAGEIND", "PEL", "PETRONET", "PFC", "PIDILITIND", "PNB", "POWERGRID", "RAMCOCEM", "RBLBANK", "RECLTD",
-          "RELIANCE", "SAIL", "SBIN", "SHREECEM", "SIEMENS", "SRF", "SRTRANSFIN", "SUNPHARMA", "SUNTV", "TATACHEM",
-          "TATACONSUM", "TATAMOTORS", "TATAPOWER", "TATASTEEL", "TCS", "TECHM", "TITAN", "TORNTPHARM", "TORNTPOWER",
-          "TVSMOTOR", "UBL", "UJJIVAN", "ULTRACEMCO", "UPL", "VEDL", "VOLTAS", "WIPRO", "ZEEL"]
+# stocks = ["ACC", "ADANIENT", "ADANIPORTS", "AMARAJABAT", "AMBUJACEM", "APOLLOHOSP", "APOLLOTYRE",
+#           "ASHOKLEY", "ASIANPAINT", "AUROPHARMA", "AXISBANK", "BAJAJ-AUTO", "BAJAJFINSV", "BAJFINANCE", "BALKRISIND",
+#           "BANDHANBNK", "BANKBARODA", "BATAINDIA", "BEL", "BERGEPAINT", "BHARATFORG", "BHARTIARTL", "BHEL", "BIOCON",
+#           "BPCL", "BRITANNIA", "CADILAHC", "CANBK", "CENTURYTEX", "CHOLAFIN", "CIPLA", "COALINDIA",
+#           "COLPAL", "CONCOR", "CUMMINSIND", "DABUR", "DIVISLAB", "DLF", "DRREDDY", "ESCORTS", "GLENMARK", "GMRINFRA", "GRASIM", "HAVELLS",
+#           "HCLTECH", "HDFC", "HDFCBANK", "HDFCLIFE", "HEROMOTOCO", "HINDALCO", "HINDPETRO", "HINDUNILVR", "IBULHSGFIN",
+#           "ICICIBANK", "ICICIPRULI", "IDEA", "IDFCFIRSTB", "IGL", "INDIGO", "INDUSINDBK", "INFRATEL", "INFY", "IOC",
+#           "ITC", "JINDALSTEL", "JSWSTEEL", "JUBLFOOD", "KOTAKBANK", "L&TFH", "LICHSGFIN", "LT", "LUPIN",
+#           "M&M", "M&MFIN", "MANAPPURAM", "MARICO", "MARUTI", "MFSL", "MGL", "MINDTREE", "MOTHERSUMI",
+#           "MUTHOOTFIN", "NATIONALUM", "NAUKRI", "NESTLEIND", "NIITTECH", "NMDC", "NTPC", "ONGC",
+#           "PAGEIND", "PEL", "PETRONET", "PFC", "PIDILITIND", "PNB", "POWERGRID", "RAMCOCEM", "RBLBANK", "RECLTD",
+#           "RELIANCE", "SAIL", "SBIN", "SHREECEM", "SIEMENS", "SRF", "SRTRANSFIN", "SUNPHARMA", "SUNTV", "TATACHEM",
+#           "TATACONSUM", "TATAMOTORS", "TATAPOWER", "TATASTEEL", "TCS", "TECHM", "TITAN", "TORNTPHARM", "TORNTPOWER",
+#           "TVSMOTOR", "UBL", "UJJIVAN", "ULTRACEMCO", "UPL", "VEDL", "VOLTAS", "WIPRO", "ZEEL"]
 
-indices = ["NIFTY", "BANKNIFTY"]
+indices = ["NIFTY"]
 
 
 end = datetime.now()
@@ -86,47 +90,56 @@ def update_position_priority():
     results = get_mongo_data(sort_order=1)
 
     for result in results:
-        try:
-            if result['stock'] in indices:
-                priority, position = 0, "Not Decided"
-            else:
-                stock_detail = {
-                    "net_ce_change": result['net_ce_change'],
-                    "net_pe_change": result['net_pe_change'],
-                    "pcr": result['pcr'],
-                    "price_change": result['change_list'][0]['price_change'],
-                    "coi_change": result['change_list'][0]['coi_change'],
-                    "delivery_change": result['change_list'][0]['delivery_change']
-                }
-                temp_df = pd.DataFrame(result['change_list'])
-                low_price_change = temp_df.price_change[temp_df.price_change < 0].mean()
-                high_price_change = temp_df.price_change[temp_df.price_change > 0].mean()
-                delivery_change = temp_df.delivery_change.mean()
-                low_coi_change = temp_df.coi_change[temp_df.coi_change < 0].mean()
-                high_coi_change = temp_df.coi_change[temp_df.coi_change > 0].mean()
+        # try:
+        if result['stock'] in indices:
+            priority, position = 0, "Not Decided"
+        else:
+            stock_detail = {
+                "net_ce_change": result['net_ce_change'],
+                "net_pe_change": result['net_pe_change'],
+                "pcr": result['pcr'],
+                "price_change": result['change_list'][0]['price_change'] if "price_change" in result['change_list'][0] else 0,
+                "coi_change": result['change_list'][0]['coi_change'] if "coi_change" in result['change_list'][0] else 0,
+                "delivery_change": result['change_list'][0]['delivery_change'] if "delivery_change" in result['change_list'][0] else 0
+            }
+            temp_df = pd.DataFrame(result['change_list'])
+            print(temp_df)
+            low_price_change = temp_df.price_change[temp_df.price_change < 0].mean() if hasattr(temp_df, "price_change") else 0
+            high_price_change = temp_df.price_change[temp_df.price_change > 0].mean() if hasattr(temp_df, "price_change") else 0
+            delivery_change = temp_df.delivery_change.mean() if hasattr(temp_df, "delivery_change") else 0
+            low_coi_change = temp_df.coi_change[temp_df.coi_change < 0].mean() if hasattr("coi_change", "price_change") else 0
+            high_coi_change = temp_df.coi_change[temp_df.coi_change > 0].mean() if hasattr("coi_change", "price_change") else 0
 
-                print(f"Finding position for {result['stock']}")
+            print(f"Finding position for {result['stock']}")
 
-                priority, position = conditions(stock_detail, low_price_change, high_price_change,
-                                                    delivery_change, low_coi_change, high_coi_change)
+            priority, position = conditions(stock_detail, low_price_change, high_price_change,
+                                                delivery_change, low_coi_change, high_coi_change)
 
-            md.pmdb["DerivativeAnalysis"].update(
-                {
-                    "$and": [
-                        {"stock": result['stock']},
-                        {"datetime": result['datetime']}
-                    ]
-                },
-                {
-                    "$set": {
-                        "priority": priority,
-                        "position": position
-                    }
-                })
-            print(f"Updated {result['stock']} with priority {priority} and position {position}")
-        except Exception as ex:
-            print(ex)
-            print(colored(f"Error occured while ranking {result['stock']}", 'red'))
+        DerivativeAnalysisResult.updateWithCondition({
+            "$and": [
+                {"stock": result['stock']},
+                {"datetime": result['datetime']}
+            ]}, {
+            "priority": priority,
+            "position": position
+        }, False);
+        # md.pmdb["DerivativeAnalysis"].update(
+        #     {
+        #         "$and": [
+        #             {"stock": result['stock']},
+        #             {"datetime": result['datetime']}
+        #         ]
+        #     },
+        #     {
+        #         "$set": {
+        #             "priority": priority,
+        #             "position": position
+        #         }
+        #     })
+        print(f"Updated {result['stock']} with priority {priority} and position {position}")
+        # except Exception as ex:
+        #     print(ex)
+        #     print(colored(f"Error occured while ranking {result['stock']}", 'red'))
 
 
 def getPosition(rank):
@@ -169,7 +182,7 @@ def fetch_historical_stock_data(stock, start_date, end_date=datetime.now()):
 def fetch_historical_futures_data(stock, start_date, end_date=datetime.now(), is_stock=True):
     expiry_month = start_date.month
     expiry_year = end_date.year
-    oi_combined_series = pd.Series()
+    oi_combined_series = pd.Series([],dtype="object")
     index_df = pd.DataFrame(columns=["Symbol", "Expiry", "Open", "High", "Low", "Close", "Last", "Settle Price",
                                      "Number of Contracts", "Turnover", "Open Interest", "Change in OI",
                                      "Underlying", "Open Interest2"])
@@ -178,28 +191,29 @@ def fetch_historical_futures_data(stock, start_date, end_date=datetime.now(), is
             break
         n_month, n_year = get_next_month_year(expiry_month, expiry_year)
 
-        try:
+        # try:
+        current_month_expiry = get_expiry_date(expiry_month, expiry_year, is_stock)
+        current_month_expiry = sorted(current_month_expiry, reverse=True)
+        if datetime.date(start_date) > current_month_expiry[0]:
+            expiry_month, expiry_year = n_month, n_year
+            n_month, n_year = get_next_month_year(expiry_month, expiry_year)
             current_month_expiry = get_expiry_date(expiry_month, expiry_year, is_stock)
             current_month_expiry = sorted(current_month_expiry, reverse=True)
-            if datetime.date(start_date) > current_month_expiry[0]:
-                expiry_month, expiry_year = n_month, n_year
-                n_month, n_year = get_next_month_year(expiry_month, expiry_year)
-                current_month_expiry = get_expiry_date(expiry_month, expiry_year, is_stock)
-                current_month_expiry = sorted(current_month_expiry, reverse=True)
 
-            next_month_expiry = get_expiry_date(n_month, n_year, is_stock)
-            next_month_expiry = sorted(next_month_expiry, reverse=True)
+        next_month_expiry = get_expiry_date(n_month, n_year, is_stock)
+        next_month_expiry = sorted(next_month_expiry, reverse=True)
 
-            expiry_month, expiry_year = n_month, n_year
-            end = datetime(year=list(current_month_expiry)[0].year,
-                           month=list(current_month_expiry)[0].month, day=list(current_month_expiry)[0].day)
+        expiry_month, expiry_year = n_month, n_year
+        end = datetime(year=list(current_month_expiry)[0].year,
+                       month=list(current_month_expiry)[0].month, day=list(current_month_expiry)[0].day)
 
-            data_fut = get_history(symbol=stock, index=not is_stock, futures=True, start=start_date, end=end,
-                                   expiry_date=list(current_month_expiry)[0])
-            data_fut2 = get_history(symbol=stock, index=not is_stock, futures=True, start=start_date, end=end,
-                                    expiry_date=list(next_month_expiry)[0])
-        except Exception as e:
-            print(e)
+        data_fut = get_history(symbol=stock, index=not is_stock, futures=True, start=start_date, end=end,
+                               expiry_date=list(current_month_expiry)[0])
+        data_fut2 = get_history(symbol=stock, index=not is_stock, futures=True, start=start_date, end=end,
+                                expiry_date=list(next_month_expiry)[0])
+        # except Exception as e:
+        #     print("Hello")
+        #     print(e)
 
         if is_stock:
             oi_combined = pd.concat([data_fut2['Open Interest'], data_fut['Open Interest']],
@@ -208,12 +222,13 @@ def fetch_historical_futures_data(stock, start_date, end_date=datetime.now(), is
         else:
             temp_df = pd.concat([data_fut, data_fut2['Open Interest'].rename("Open Interest2")],
                                 axis=1)
-            index_df = index_df.append(temp_df)
+            # index_df = index_df.append(temp_df)
+            index_df = pd.concat([index_df, temp_df])
 
         start_date = end + timedelta(days=1)
 
     if not is_stock:
-        index_df['Open Interest2'].ffill(0, inplace=True)
+        index_df['Open Interest2'].ffill(axis=0, inplace=True)
         index_df['oi_combined'] = index_df['Open Interest'] + index_df['Open Interest2']
         index_df['coi_change'] = index_df.oi_combined.pct_change() * 100
         return index_df
@@ -234,7 +249,8 @@ def get_derivativeprice_list(dt, price_type="fo"):
         res = derivative_price_list_url(yyyy, MMM, dt.strftime("%d%b%Y").upper())
         txt = unzip_str(res.content)
     # fp = six.StringIO(txt)
-    df = pd.read_csv(txt)
+
+    df = pd.read_csv(StringIO(txt), sep=",")
     return df
 
 
@@ -269,17 +285,17 @@ def get_daily_eq_bhav_copy(bhavcopy_dt):
 
 
 def get_dates_to_fetch(stock):
-    result = md.pmdb['DerivativeAnalysis'].find({"stock": stock}).sort([("datetime", -1)]).limit(1)
+    result = DerivativeAnalysisResult.get(**{"stock": stock, "sort_fields": [("datetime", -1)], "limit": 1})
+    
     data_exists = True
-    result = list(result)
-    if len(result) > 0:
+    if result is not None and len(result) > 0:
         s_date = result[0]['datetime'] + timedelta(days=1)
         if s_date.strftime("%A") == "Saturday":
             s_date = result[0]['datetime'] + timedelta(days=2)
         elif s_date.strftime("%A") == "Sunday":
             s_date = result[0]['datetime'] + timedelta(days=1)
     else:
-        s_date = datetime.now() - timedelta(days=100)
+        s_date = datetime.now() - timedelta(days=60)
         data_exists = False
     return s_date, datetime.now(), data_exists
     # data = get_history(symbol=result[0]['stock'], start=s_date, end=e_date)
@@ -289,9 +305,11 @@ def get_dates_to_fetch(stock):
 def conditions(df, low_price_change=-5, high_price_change=5,
                delivery_change=100, low_coi_change=-5, high_coi_change=5):
 
-    if df['net_pe_change'] > 0 and df['net_ce_change'] < 0:
+    if df['net_pe_change'] is not None and df['net_ce_change'] is not None \
+        and df['net_pe_change'] > 0 and df['net_ce_change'] < 0:
         position = "Long"
-    elif df['net_pe_change'] < 0 and df['net_ce_change'] > 0:
+    elif df['net_pe_change'] is not None and df['net_ce_change'] is not None \
+        and df['net_pe_change'] < 0 and df['net_ce_change'] > 0:
         position = "Short"
 
     delivery_change = 99;
@@ -381,40 +399,41 @@ def get_next_month_year(month, year, fwd_month=1):
 
 
 def load_initial_data(instrument, s_date, e_date=datetime.now()):
-    records = list(md.pmdb['DerivativeAnalysis'].find({'stock': instrument}))
-    try:
-        if len(records) == 0:
-            fetch_historical_stock_data(instrument, s_date, e_date)
-            if final_df.shape[0] > 0:
-                fetch_historical_futures_data(instrument, s_date, e_date)
-            else:
-                return
-            final_df.round(2)
-            md.pmdb['DerivativeAnalysis'].insert_many(final_df.to_dict('records'))
-            print("Data inserted for " + instrument)
+    records = DerivativeAnalysisResult.getMany(**{'stock': instrument})
+    # try:
+    if len(records) == 0:
+        fetch_historical_stock_data(instrument, s_date, e_date)
+        if final_df.shape[0] > 0:
+            fetch_historical_futures_data(instrument, s_date, e_date)
         else:
-            print("Already data exist for " + instrument)
-    except Exception as ex:
-        print(ex)
+            return
+        final_df.round(2)
+        DerivativeAnalysisResult.insertMany(final_df.to_dict('records'))
+        print("Data inserted for " + instrument)
+    else:
+        print("Already data exist for " + instrument)
+    # except Exception as ex:
+    #     print(ex)
 
 
 def get_mongo_data(record_count=100, sort_order=-1):
-    result = list(md.pmdb['DerivativeAnalysis'].aggregate([
+    result = DerivativeAnalysisResult.aggregate([
         {'$sort': {'datetime': sort_order}},
-        {'$group': {
-            "_id": "$stock",
-            "stock": {'$last': '$stock'},
-            'datetime': {'$last': '$datetime'},
-            'oi_combined': {"$last": "$oi_combined"},
-            'vwap': {"$last": "$vwap"},
-            'net_ce_change': {"$last": "$net_ce_change"},
-            'net_pe_change': {"$last": "$net_pe_change"},
-            'pcr': {"$last": "$pcr"},
-            'delivery_list': {"$push": {"delivery": "$delivery"}},
-            'change_list': {"$push": {"delivery_change": "$delivery_change",
-                                      "price_change": "$price_change",
-                                      "coi_change": "$coi_change"}},
-        }
+        {
+            '$group': {
+                "_id": "null",
+                "stock": {'$last': '$stock'},
+                'datetime': {'$last': '$datetime'},
+                'oi_combined': {"$last": "$oi_combined"},
+                'vwap': {"$last": "$vwap"},
+                'net_ce_change': {"$last": "$net_ce_change"},
+                'net_pe_change': {"$last": "$net_pe_change"},
+                'pcr': {"$last": "$pcr"},
+                'delivery_list': {"$push": {"delivery": "$delivery"}},
+                'change_list': {"$push": {"delivery_change": "$delivery_change",
+                                          "price_change": "$price_change",
+                                          "coi_change": "$coi_change"}},
+            }
         },
         {
             '$project': {
@@ -442,12 +461,12 @@ def get_mongo_data(record_count=100, sort_order=-1):
                 "change_list": "$change_list"
             }
         },
-    ]))
-    return list(result)
+    ])
+    return result
 
 
 def prepare_left_historical_data(stock, s_date, e_date):
-    db_data = list(md.pmdb['DerivativeAnalysis'].find({"stock": stock}).sort([("datetime", 1)]).limit(90))
+    db_data = DerivativeAnalysis.getMany({"stock": stock}).sort([("datetime", 1)]).limit(90)
     db_df = pd.DataFrame(db_data)
     fetch_historical_stock_data(stock=stock, start_date=s_date, end_date=e_date)
     if final_df.shape[0] == 0:
@@ -468,7 +487,7 @@ def prepare_left_historical_data(stock, s_date, e_date):
         db_df.round(2)
 
         db_df = db_df.loc[prev_row_count:, :]
-        md.pmdb['DerivativeAnalysis'].insert_many(db_df.to_dict('records'))
+        DerivativeAnalysisResult.insertMany(db_df.to_dict('records'))
         print("Data inserted for " + stock)
     else:
         print("No new data available to insert for " + stock)
@@ -499,7 +518,7 @@ def load_daily_bhav_copy():
         eq_df = get_daily_eq_bhav_copy(bhavcopy_date)
 
     der_df = get_daily_fo_bhav_copy(bhavcopy_date)
-    bhavcopy = pd.merge(der_df, eq_df, on="SYMBOL", right_index=True)
+    bhavcopy = pd.merge(der_df, eq_df, on="SYMBOL")
     bhavcopy.rename(columns={'SYMBOL': 'stock', 'OPEN_PRICE': 'open', 'CLOSE_PRICE': 'close', 'LOW_PRICE': 'low',
                              'HIGH_PRICE': 'high', 'AVG_PRICE': 'vwap', 'TIMESTAMP': 'datetime'}, inplace=True)
 
@@ -514,10 +533,10 @@ def load_daily_bhav_copy():
 # Update db with option data
 def update_option_data(stocks, type="equities"):
     for ticker in stocks:
-        db_data = list(md.pmdb['DerivativeAnalysis'].find({"stock": ticker}).sort("datetime", -1).limit(2))
+        db_data = DerivativeAnalysisResult.getSortedLimited(**{"stock": ticker, "sort_fields":[("datetime", -1)], "limit": 2})
         result = oca.fetch_oi(stock=ticker, type=type)
         if result is None:
-            result = md.pmdb["DerivativeAnalysis"].update(
+            result = DerivativeAnalysisResult.update(
                 {
                     "$and": [
                         {"stock": ticker},
@@ -567,28 +586,28 @@ def update_option_data(stocks, type="equities"):
             temp = datetime.strptime(result['datetime'], "%d-%b-%Y %H:%M:%S") \
                 .replace(hour=0, minute=0, second=0, microsecond=0)
             try:
-                result = md.pmdb["DerivativeAnalysis"].update(
+                result = DerivativeAnalysisResult.upsert(
                     {
                         "$and": [
                             {"stock": ticker},
                             {"datetime": temp}
                         ]
                     },
-                    {
-                        "$set": {
-                            "max_pain_pe": result['max_pain_pe'],
-                            "max_pain_ce": result['max_pain_ce'],
-                            "net_ce": int(result['net_ce']),
-                            "net_pe": int(result['net_pe']),
-                            "net_ce_change": float(net_ce_change),
-                            "net_pe_change": float(net_pe_change),
-                            "net_ce_change_pct": float(net_ce_change_pct),
-                            "net_pe_change_pct": float(net_pe_change_pct),
-                            "pcr": float(result["pcr"]),
-                            "pcr_of_change": float(pcr_of_change)
-                        }
+                    **{
+                        "max_pain_pe": result['max_pain_pe'],
+                        "max_pain_ce": result['max_pain_ce'],
+                        "net_ce": int(result['net_ce']),
+                        "net_pe": int(result['net_pe']),
+                        "net_ce_change": float(net_ce_change),
+                        "net_pe_change": float(net_pe_change),
+                        "net_ce_change_pct": float(net_ce_change_pct),
+                        "net_pe_change_pct": float(net_pe_change_pct),
+                        "pcr": float(result["pcr"]),
+                        "pcr_of_change": float(pcr_of_change)
                     })
-                print(f"{result['nModified']} option data records were updated for {ticker}")
+
+                if result is None:
+                    print(f"Failed to update option data  for {ticker}")
             except Exception as e:
                 print(colored(e, "red"))
 
@@ -618,28 +637,31 @@ def update_stock_data():
     bhavcopy = bhavcopy[bhavcopy.stock.isin(stocks)]
     bhavcopy.reset_index(inplace=True, drop=True)
     results = get_mongo_data(sort_order=1)
+    print("Results")
+    print(results)
     db_stock_list = []
     for result in results:
         db_stock_list.append(result['stock'])
-        try:
-            if result['datetime'] >= bhavcopy['datetime'][0]:
-                bhavcopy = bhavcopy[bhavcopy.stock != result['stock']]
-                bhavcopy.reset_index(inplace=True, drop=True)
-            else:
-                bhavcopy.loc[bhavcopy.stock == result['stock'], 'avg_del'] = result['avg_del']
-                bhavcopy.loc[bhavcopy.stock == result['stock'], 'delivery_change'] = \
-                    bhavcopy.loc[bhavcopy.stock == result['stock'], 'delivery'] * 100 / result['avg_del']
-                bhavcopy.loc[bhavcopy.stock == result['stock'], 'coi_change'] = \
-                    (bhavcopy.loc[bhavcopy.stock == result['stock'], 'oi_combined'] - result['oi_combined']) * 100 / \
-                    result['oi_combined']
-        except Exception as e:
-            print(e)
-            print("Error occured while processing bhavcopy for " + result['stock'])
+        # try:
+        print(bhavcopy)
+        if result['datetime'] >= bhavcopy['datetime'][0]:
+            bhavcopy = bhavcopy[bhavcopy.stock != result['stock']]
+            bhavcopy.reset_index(inplace=True, drop=True)
+        else:
+            bhavcopy.loc[bhavcopy.stock == result['stock'], 'avg_del'] = result['avg_del']
+            bhavcopy.loc[bhavcopy.stock == result['stock'], 'delivery_change'] = \
+                bhavcopy.loc[bhavcopy.stock == result['stock'], 'delivery'] * 100 / result['avg_del']
+            bhavcopy.loc[bhavcopy.stock == result['stock'], 'coi_change'] = \
+                (bhavcopy.loc[bhavcopy.stock == result['stock'], 'oi_combined'] - result['oi_combined']) * 100 / \
+                result['oi_combined']
+        # except Exception as e:
+        #     print(e)
+        #     print("Error occured while processing bhavcopy for " + result['stock'])
 
     bhavcopy = bhavcopy[bhavcopy.stock.isin(db_stock_list)]
     bhavcopy.reset_index(inplace=True, drop=True)
     if bhavcopy.shape[0] > 0:
-        md.pmdb['DerivativeAnalysis'].insert_many(bhavcopy.to_dict('records'))
+        DerivativeAnalysisResult.insertMany(bhavcopy.to_dict('records'))
         print("Future data updated successfully")
     else:
         print("No new data available in bhavcopy")
@@ -651,16 +673,19 @@ def update_index_data():
         try:
             if s_date < datetime.now().replace(hour=0, minute=0, second=0, microsecond=0):
                 if not data_exists:
+                    print(f"Start Date - {s_date}")
+                    print(f"Start Date - {e_date}")
                     df = fetch_historical_futures_data(index, s_date, e_date, is_stock=False)
+                    print(df)
                     df['datetime'] = pd.to_datetime(df.index)
+                    print(df)
                     df.rename(columns={"Symbol": "stock", "Open": "open", "High": "high", "Low": "low",
                                        "Close": "close"}, inplace=True)
                     df.drop(columns=["Expiry", "Last", "Settle Price", "Number of Contracts", "Turnover",
                                      "Open Interest", "Change in OI", "Underlying", "Open Interest2"], inplace=True)
-                    md.pmdb['DerivativeAnalysis'].insert_many(df.to_dict('records'))
+                    DerivativeAnalysisResult.insertMany(df.to_dict('records'))
                 else:
-                    db_data = list(
-                        md.pmdb['DerivativeAnalysis'].find({"stock": index}).sort([("datetime", 1)]).limit(90))
+                    db_data = DerivativeAnalysisResult.getMany({"stock": index, "sort_fields":([("datetime", 1)]), "limit":90})
                     db_df = pd.DataFrame(db_data)
                     df = fetch_historical_futures_data(stock=index, start_date=s_date, end_date=e_date, is_stock=False)
                     df.rename(columns={"Symbol": "stock", "Open": "open", "High": "high", "Low": "low",
@@ -678,7 +703,7 @@ def update_index_data():
                         db_df.round(2)
 
                         db_df = db_df.loc[prev_row_count:, :]
-                        md.pmdb['DerivativeAnalysis'].insert_many(db_df.to_dict('records'))
+                        DerivativeAnalysisResult.insertMany(db_df.to_dict('records'))
                         print("Data inserted for " + index)
                     else:
                         print("No new data available to insert for " + index)
@@ -719,25 +744,31 @@ def update_index_data():
     bhavcopy = bhavcopy[bhavcopy.stock.isin(db_stock_list)]
     bhavcopy.reset_index(inplace=True, drop=True)
     if bhavcopy.shape[0] > 0:
-        md.pmdb['DerivativeAnalysis'].insert_many(bhavcopy.to_dict('records'))
+        DerivativeAnalysisResult.insertMany(bhavcopy.to_dict('records'))
         print("Future data updated successfully")
     else:
         print("No new data available in bhavcopy")
 
 
 def load_expiry_dates():
-    r = requests.get("https://www.nseindia.com/api/quote-derivative?symbol=NIFTY",
+    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, '
+                         'like Gecko) '
+                         'Chrome/80.0.3987.149 Safari/537.36',
+           'accept-language': 'en,gu;q=0.9,hi;q=0.8', 'accept-encoding': 'gzip, deflate, br'}
+    session = requests.Session()
+    request = session.get(baseurl, headers=headers, timeout=5)
+    cookies = dict(request.cookies)
+    r = session.get("https://www.nseindia.com/api/quote-derivative?symbol=NIFTY",
                      timeout=15,
-                     headers={'User-Agent': 'Mozilla/5.0'}).json()
-    db_dates = list(md.pmdb["ExpiryDates"].find())
+                     headers=headers,
+                     cookies=cookies).json()
+    db_dates = ExpiryDates.getMany()
     db_dates = list(map(lambda el: el['expiryDate'], db_dates))
     res = []
     for i in r['expiryDates']:
         if i not in res and i not in db_dates:
             res.append(i)
-            md.pmdb["ExpiryDates"].insert({'expiryDate': i})
-
-    print(db_dates)
+            ExpiryDates.create(**{'expiryDate': i})
 
 
 def get_expiry_date(expiry_month, expiry_year, is_stock=True, is_second_call=False):
@@ -752,7 +783,7 @@ def get_expiry_date(expiry_month, expiry_year, is_stock=True, is_second_call=Fal
                   "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"
                   }
 
-    db_dates = list(md.pmdb["ExpiryDates"].find())
+    db_dates = ExpiryDates.getMany()
     db_dates = list(map(lambda el: el['expiryDate'], db_dates))
     temp = month_dict[str(expiry_month)] + "-" + str(expiry_year)
     res = []
@@ -772,44 +803,44 @@ def get_expiry_date(expiry_month, expiry_year, is_stock=True, is_second_call=Fal
 def load_option_data_from_db():
     stocks.extend(indices)
     for ticker in stocks:
-        try:
-            results = list(md.pmdb["OptionData"].find({"stock": ticker}).sort("datetime", -1))
-            for i in range(len(results)-1):
-                result = results[i]
-                final_dict = {
-                    'max_pain_ce': result['max_pain_ce'],
-                    'max_pain_pe': result['max_pain_pe'],
-                    'net_ce': result['net_ce'],
-                    'net_pe': result['net_pe'],
-                    'pcr': result['pcr']
-                }
-                if i <= len(results)-2:
-                    final_dict['net_ce_change'] = result['net_ce'] - results[i + 1]['net_ce']
-                    final_dict['net_pe_change'] = result['net_pe'] - results[i + 1]['net_pe']
-                    if results[i+1]['net_ce'] != 0:
-                        final_dict['net_ce_change_pct'] = final_dict['net_ce_change']*100/results[i+1]['net_ce']
-                    else:
-                        final_dict['net_ce_change_pct'] = 99
-                    if results[i + 1]['net_pe'] != 0:
-                        final_dict['net_pe_change_pct'] = final_dict['net_pe_change']*100/results[i + 1]['net_pe']
-                    else:
-                        final_dict['net_pe_change_pct'] = 99
+        # try:
+        results = OptionData.getSortedLimited(**{"stock": ticker, "sort_fields": [("datetime", -1)], "limit": 100})
+        for i in range(len(results)-1):
+            result = results[i]
+            final_dict = {
+                'max_pain_ce': result['max_pain_ce'],
+                'max_pain_pe': result['max_pain_pe'],
+                'net_ce': result['net_ce'],
+                'net_pe': result['net_pe'],
+                'pcr': result['pcr']
+            }
+            if i <= len(results)-2:
+                final_dict['net_ce_change'] = result['net_ce'] - results[i + 1]['net_ce']
+                final_dict['net_pe_change'] = result['net_pe'] - results[i + 1]['net_pe']
+                if results[i+1]['net_ce'] != 0:
+                    final_dict['net_ce_change_pct'] = final_dict['net_ce_change']*100/results[i+1]['net_ce']
+                else:
+                    final_dict['net_ce_change_pct'] = 99
+                if results[i + 1]['net_pe'] != 0:
+                    final_dict['net_pe_change_pct'] = final_dict['net_pe_change']*100/results[i + 1]['net_pe']
+                else:
+                    final_dict['net_pe_change_pct'] = 99
 
-                    if final_dict['net_ce_change'] != 0:
-                        final_dict['pcr_of_change'] = final_dict['net_pe_change']*100/final_dict['net_ce_change']
-                    else:
-                        final_dict['pcr_of_change'] = 1
+                if final_dict['net_ce_change'] != 0:
+                    final_dict['pcr_of_change'] = final_dict['net_pe_change']*100/final_dict['net_ce_change']
+                else:
+                    final_dict['pcr_of_change'] = 1
 
-                writeResult = md.pmdb['DerivativeAnalysis'].update({
-                        "$and": [
-                            {"stock": ticker},
-                            {"datetime": result['datetime']}
-                        ]
-                    }, {"$set": final_dict}, False)
-            print(f"Option loading completed for {ticker}")
-        except Exception as ex:
-            print(colored(f"Error occured for {ticker}", "red"))
-            print(ex.with_traceback())
+            writeResult = DerivativeAnalysisResult.updateWithCondition({
+                    "$and": [
+                        {"stock": ticker},
+                        {"datetime": result['datetime']}
+                    ]
+                }, final_dict, False)
+        print(f"Option loading completed for {ticker}")
+        # except Exception as ex:
+        #     print(colored(f"Error occured for {ticker}", "red"))
+        #     print(ex.with_traceback())
 
 
 def calculate_pivots(data):
@@ -836,22 +867,23 @@ def update_cpr():
     stocks.extend(indices)
     pivots = {"next": {}, "current": {}, "prev":{}}
     for ticker in stocks:
-        results = list(md.pmdb["DerivativeAnalysis"].find({"stock": ticker}).sort("datetime", -1).limit(3))
-        pivots["next"] = calculate_pivots(results[0])
-        if "pivots" in results[1].keys() and results[1]['pivots']['next'] is not {}\
-                and results[1]['pivots']['current'] is not {}:
-            pivots['current'] = results[1]['pivots']['next']
-            pivots['prev'] = calculate_pivots(results[2])
-        else:
-            pivots['current'] = calculate_pivots(results[1])
-            pivots['prev'] = calculate_pivots(results[2])
+        try:
+            results = DerivativeAnalysisResult.getSortedLimited(**{"stock": ticker, "sort_fields": [("datetime", -1)], "limit":3})
+            pivots["next"] = calculate_pivots(results[0])
+            if "pivots" in results[1].keys() and results[1]['pivots']['next'] is not {}\
+                    and results[1]['pivots']['current'] is not {}:
+                pivots['current'] = results[1]['pivots']['next']
+                pivots['prev'] = calculate_pivots(results[2])
+            else:
+                pivots['current'] = calculate_pivots(results[1])
+                pivots['prev'] = calculate_pivots(results[2])
 
-        print(ticker)
-        writeResult = md.pmdb["DerivativeAnalysis"].update(
-            {"_id": results[0]['_id']},
-            {"$set": {"pivot_points": pivots}}, False
-        )
-        print(writeResult)
+            writeResult = DerivativeAnalysisResult.update(
+                results[0]['_id'],
+                **{"pivot_points": pivots}
+            )
+        except Exception as e:
+            print(colored(e, "red"))
 
 
 def save_option_data_to_db():
@@ -869,33 +901,19 @@ def save_option_data_to_db():
             print(colored(e, "red"))
 
 
-# update_stock_data()
-
-# update_index_data()
-
-# update_option_data(stocks, "equities")
-# update_option_data(indices, "indices")
-
-# load_option_data_from_db()
-# save_option_data_to_db()
-
-# update_cpr()
-
-# update_position_priority()
-
 def nse_derivative_loader_main():
     update_stock_data()
 
-    update_index_data()
+    # update_index_data()
 
-    update_option_data(stocks, "equities")
-    update_option_data(indices, "indices")
+    # update_option_data(stocks, "equities")
+    # update_option_data(indices, "indices")
 
-    load_option_data_from_db()
-    save_option_data_to_db()
+    # load_option_data_from_db()
+    # save_option_data_to_db()
 
-    update_cpr()
+    # update_cpr()
 
-    update_position_priority()
+    # update_position_priority()
 
-# nse_derivative_loader_main()
+nse_derivative_loader_main()

@@ -5,6 +5,11 @@
       "taskLabel": "task-nse_derivative_loader",
       "appliesTo": "nse_derivative_loader.py",
       "type": "launch"
+    },
+    {
+      "taskLabel": "task-tejas-trader",
+      "appliesTo": "/",
+      "type": "launch"
     }
   ]
 }

@@ -1,1 +1,1 @@
-web: gunicorn run:app & python tejas_run.py
+web: gunicorn run:app

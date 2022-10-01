@@ -11,7 +11,7 @@ from resources.strategy_resource import StrategyResource, StrategiesResource
 from resources.technical_resource import TechnicalResource, TechnicalsResource
 from resources.authentication_resource import AuthenticationResource
 from resources.seed_resource import SeedResource
-from resources.derivative_analysis_resource import DerivativeAnalysisResource, DetailedDerivativeAnalysisResource
+from resources.derivative_analysis_resource import DerivativeAnalysisResource, DetailedDerivativeAnalysisResource, DataLoaderAnalysisResource
 
 api_bp = Blueprint('api', __name__)
 
@@ -55,3 +55,5 @@ api.add_resource(SeedResource, '/seed')
 api.add_resource(DetailedDerivativeAnalysisResource, '/detailDerivativeAnalysisResult/<string:stock>')
 
 api.add_resource(DailySelectionResource, '/dailySelection', '/dailySelection/<string:id>')
+
+api.add_resource(DataLoaderAnalysisResource, '/dataLoaderAnalysisResource/<string:type>')

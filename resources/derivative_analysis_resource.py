@@ -5,6 +5,8 @@ from flask import Response, request, jsonify
 from model import pmdb, MongoEngineJSONEncoder
 from models.derivative_analysis_result import DerivativeAnalysisResult
 import pandas as pd
+from nse_derivative_loader import nse_derivative_loader_main
+from nse_equity_db_loader import equity_loader_main
 
 from utils import utilities
 
@@ -12,7 +14,8 @@ from utils import utilities
 class DerivativeAnalysisResource(Resource):
 
     def get(self):
-        derivative_analysis_result = list(pmdb['DerivativeAnalysis'].aggregate([
+        
+        derivative_analysis_result = DerivativeAnalysisResult.aggregate([
             {'$sort': {
                 'datetime': 1,
                 'priority': -1
@@ -68,7 +71,64 @@ class DerivativeAnalysisResource(Resource):
                     "cpr_width": "$pivot_points.next.width"
                 }
             }
-        ]))
+        ]);
+        # derivative_analysis_result = list(pmdb['DerivativeAnalysisResult'].aggregate([
+        #     {'$sort': {
+        #         'datetime': 1,
+        #         'priority': -1
+        #     }},
+        #     {'$group': {
+        #         "_id": "$stock",
+        #         "stock": {'$last': '$stock'},
+        #         'datetime': {'$last': '$datetime'},
+        #         "open": {'$last': "$open"},
+        #         "high": {'$last': "$high"},
+        #         "low": {'$last': "$low"},
+        #         "close": {'$last': "$close"},
+        #         "coi_change": {'$last': "$coi_change"},
+        #         "oi_combined": {'$last': "$oi_combined"},
+        #         "delivery_change": {'$last': "$delivery_change"},
+        #         "delivery": {'$last': "$delivery"},
+        #         "vwap": {'$last': "$vwap"},
+        #         "avg_del": {'$last': "$avg_del"},
+        #         "price_change": {'$last': "$price_change"},
+        #         "position": {'$last': "$position"},
+        #         "priority": {'$last': "$priority"},
+        #         "pcr": {'$last': "$pcr"},
+        #         "pcr_of_change": {'$last': "$pcr_of_change"},
+        #         "net_ce_change": {'$last': "$net_ce_change"},
+        #         "net_pe_change": {'$last': "$net_pe_change"},
+        #         "net_ce_change_pct": {'$last': "$net_ce_change_pct"},
+        #         "net_pe_change_pct": {'$last': "$net_pe_change_pct"},
+        #         "pivot_points": {'$last': "$pivot_points"},
+        #     }},
+        #     {
+        #         '$project': {
+        #             "datetime": "$datetime",
+        #             "stock": "$stock",
+        #             "open": "$open",
+        #             "high": "$high",
+        #             "low": "$low",
+        #             "close": "$close",
+        #             "coi_change": "$coi_change",
+        #             "oi_combined": "$oi_combined",
+        #             "delivery_change": "$delivery_change",
+        #             "delivery": "$delivery",
+        #             "vwap": "$vwap",
+        #             "price_change": "$price_change",
+        #             "position": "$position",
+        #             "priority": "$priority",
+        #             "pcr": "$pcr",
+        #             "pcr_of_change": "$pcr_of_change",
+        #             "net_ce_change": "$net_ce_change",
+        #             "net_pe_change": "$net_pe_change",
+        #             "net_ce_change_pct": "$net_ce_change_pct",
+        #             "net_pe_change_pct": "$net_pe_change_pct",
+        #             "pivot_points": "$pivot_points",
+        #             "cpr_width": "$pivot_points.next.width"
+        #         }
+        #     }
+        # ]))
         return jsonify({"message": "Derivatives result", "result": derivative_analysis_result})
 
 
@@ -139,3 +199,10 @@ class DetailedDerivativeAnalysisResource(Resource):
         for result in derivative_analysis_result:
             temp.append(utilities.dict_nan_cleaner(result))
         return jsonify({"message": "Derivatives result", "result": temp})
+
+class DataLoaderAnalysisResource(Resource):
+    def get(self, type):
+        if type == "derivatives":
+            nse_derivative_loader_main()
+        else:
+            equity_loader_main()
