@@ -4,8 +4,16 @@ from models.technical import Technical
 from models.strategy import Strategy
 from models.instrument import Instrument
 from models.operator import Operator
-from datetime import datetime
+from datetime import datetime, time
 from dateutil import tz
+
+def is_time_between(begin_time, end_time, check_time=None):
+    # If check time is not given, default to current UTC time
+    check_time = check_time or datetime.now().time()
+    if begin_time < end_time:
+        return check_time >= begin_time and check_time <= end_time
+    else: # crosses midnight
+        return check_time >= begin_time or check_time <= end_time
 
 def dict_nan_cleaner(dict):
     for k, v in dict.items():

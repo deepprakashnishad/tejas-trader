@@ -110,7 +110,7 @@ def update_position_priority():
                 priority, position = conditions(stock_detail, low_price_change, high_price_change,
                                                     delivery_change, low_coi_change, high_coi_change)
 
-            md.pmdb["DerivativeAnalysis"].update(
+            md.pmdb["DerivativeAnalysisResult"].update(
                 {
                     "$and": [
                         {"stock": result['stock']},
@@ -269,7 +269,7 @@ def get_daily_eq_bhav_copy(bhavcopy_dt):
 
 
 def get_dates_to_fetch(stock):
-    result = md.pmdb['DerivativeAnalysis'].find({"stock": stock}).sort([("datetime", -1)]).limit(1)
+    result = md.pmdb['DerivativeAnalysisResult'].find({"stock": stock}).sort([("datetime", -1)]).limit(1)
     data_exists = True
     result = list(result)
     if len(result) > 0:
@@ -381,7 +381,7 @@ def get_next_month_year(month, year, fwd_month=1):
 
 
 def load_initial_data(instrument, s_date, e_date=datetime.now()):
-    records = list(md.pmdb['DerivativeAnalysis'].find({'stock': instrument}))
+    records = list(md.pmdb['DerivativeAnalysisResult'].find({'stock': instrument}))
     try:
         if len(records) == 0:
             fetch_historical_stock_data(instrument, s_date, e_date)
@@ -390,7 +390,7 @@ def load_initial_data(instrument, s_date, e_date=datetime.now()):
             else:
                 return
             final_df.round(2)
-            md.pmdb['DerivativeAnalysis'].insert_many(final_df.to_dict('records'))
+            md.pmdb['DerivativeAnalysisResult'].insert_many(final_df.to_dict('records'))
             print("Data inserted for " + instrument)
         else:
             print("Already data exist for " + instrument)
@@ -399,7 +399,7 @@ def load_initial_data(instrument, s_date, e_date=datetime.now()):
 
 
 def get_mongo_data(record_count=100, sort_order=-1):
-    result = list(md.pmdb['DerivativeAnalysis'].aggregate([
+    result = list(md.pmdb['DerivativeAnalysisResult'].aggregate([
         {'$sort': {'datetime': sort_order}},
         {'$group': {
             "_id": "$stock",
@@ -447,7 +447,7 @@ def get_mongo_data(record_count=100, sort_order=-1):
 
 
 def prepare_left_historical_data(stock, s_date, e_date):
-    db_data = list(md.pmdb['DerivativeAnalysis'].find({"stock": stock}).sort([("datetime", 1)]).limit(90))
+    db_data = list(md.pmdb['DerivativeAnalysisResult'].find({"stock": stock}).sort([("datetime", 1)]).limit(90))
     db_df = pd.DataFrame(db_data)
     fetch_historical_stock_data(stock=stock, start_date=s_date, end_date=e_date)
     if final_df.shape[0] == 0:
@@ -468,7 +468,7 @@ def prepare_left_historical_data(stock, s_date, e_date):
         db_df.round(2)
 
         db_df = db_df.loc[prev_row_count:, :]
-        md.pmdb['DerivativeAnalysis'].insert_many(db_df.to_dict('records'))
+        md.pmdb['DerivativeAnalysisResult'].insert_many(db_df.to_dict('records'))
         print("Data inserted for " + stock)
     else:
         print("No new data available to insert for " + stock)
@@ -506,7 +506,7 @@ def load_daily_bhav_copy():
     bhavcopy.drop(columns=['DATE1', 'DELIV_PER', 'DELIV_QTY', 'NO_OF_TRADES',
                            'PREV_CLOSE', 'TTL_TRD_QNTY', 'TURNOVER_LACS'], inplace=True)
     bhavcopy['datetime'] = pd.to_datetime(bhavcopy['datetime'])
-    # md.pmdb['DerivativeAnalysis'].insert_many(bhavcopy.to_dict('records'))
+    # md.pmdb['DerivativeAnalysisResult'].insert_many(bhavcopy.to_dict('records'))
     # print("Data updated to database successfully")
     return bhavcopy
 
@@ -514,10 +514,10 @@ def load_daily_bhav_copy():
 # Update db with option data
 def update_option_data(stocks, type="equities"):
     for ticker in stocks:
-        db_data = list(md.pmdb['DerivativeAnalysis'].find({"stock": ticker}).sort("datetime", -1).limit(2))
+        db_data = list(md.pmdb['DerivativeAnalysisResult'].find({"stock": ticker}).sort("datetime", -1).limit(2))
         result = oca.fetch_oi(stock=ticker, type=type)
         if result is None:
-            result = md.pmdb["DerivativeAnalysis"].update(
+            result = md.pmdb["DerivativeAnalysisResult"].update(
                 {
                     "$and": [
                         {"stock": ticker},
@@ -567,7 +567,7 @@ def update_option_data(stocks, type="equities"):
             temp = datetime.strptime(result['datetime'], "%d-%b-%Y %H:%M:%S") \
                 .replace(hour=0, minute=0, second=0, microsecond=0)
             try:
-                result = md.pmdb["DerivativeAnalysis"].update(
+                result = md.pmdb["DerivativeAnalysisResult"].update(
                     {
                         "$and": [
                             {"stock": ticker},
@@ -639,7 +639,7 @@ def update_stock_data():
     bhavcopy = bhavcopy[bhavcopy.stock.isin(db_stock_list)]
     bhavcopy.reset_index(inplace=True, drop=True)
     if bhavcopy.shape[0] > 0:
-        md.pmdb['DerivativeAnalysis'].insert_many(bhavcopy.to_dict('records'))
+        md.pmdb['DerivativeAnalysisResult'].insert_many(bhavcopy.to_dict('records'))
         print("Future data updated successfully")
     else:
         print("No new data available in bhavcopy")
@@ -657,10 +657,10 @@ def update_index_data():
                                        "Close": "close"}, inplace=True)
                     df.drop(columns=["Expiry", "Last", "Settle Price", "Number of Contracts", "Turnover",
                                      "Open Interest", "Change in OI", "Underlying", "Open Interest2"], inplace=True)
-                    md.pmdb['DerivativeAnalysis'].insert_many(df.to_dict('records'))
+                    md.pmdb['DerivativeAnalysisResult'].insert_many(df.to_dict('records'))
                 else:
                     db_data = list(
-                        md.pmdb['DerivativeAnalysis'].find({"stock": index}).sort([("datetime", 1)]).limit(90))
+                        md.pmdb['DerivativeAnalysisResult'].find({"stock": index}).sort([("datetime", 1)]).limit(90))
                     db_df = pd.DataFrame(db_data)
                     df = fetch_historical_futures_data(stock=index, start_date=s_date, end_date=e_date, is_stock=False)
                     df.rename(columns={"Symbol": "stock", "Open": "open", "High": "high", "Low": "low",
@@ -678,7 +678,7 @@ def update_index_data():
                         db_df.round(2)
 
                         db_df = db_df.loc[prev_row_count:, :]
-                        md.pmdb['DerivativeAnalysis'].insert_many(db_df.to_dict('records'))
+                        md.pmdb['DerivativeAnalysisResult'].insert_many(db_df.to_dict('records'))
                         print("Data inserted for " + index)
                     else:
                         print("No new data available to insert for " + index)
@@ -719,7 +719,7 @@ def update_index_data():
     bhavcopy = bhavcopy[bhavcopy.stock.isin(db_stock_list)]
     bhavcopy.reset_index(inplace=True, drop=True)
     if bhavcopy.shape[0] > 0:
-        md.pmdb['DerivativeAnalysis'].insert_many(bhavcopy.to_dict('records'))
+        md.pmdb['DerivativeAnalysisResult'].insert_many(bhavcopy.to_dict('records'))
         print("Future data updated successfully")
     else:
         print("No new data available in bhavcopy")
@@ -800,7 +800,7 @@ def load_option_data_from_db():
                     else:
                         final_dict['pcr_of_change'] = 1
 
-                writeResult = md.pmdb['DerivativeAnalysis'].update({
+                writeResult = md.pmdb['DerivativeAnalysisResult'].update({
                         "$and": [
                             {"stock": ticker},
                             {"datetime": result['datetime']}
@@ -836,7 +836,7 @@ def update_cpr():
     stocks.extend(indices)
     pivots = {"next": {}, "current": {}, "prev":{}}
     for ticker in stocks:
-        results = list(md.pmdb["DerivativeAnalysis"].find({"stock": ticker}).sort("datetime", -1).limit(3))
+        results = list(md.pmdb["DerivativeAnalysisResult"].find({"stock": ticker}).sort("datetime", -1).limit(3))
         pivots["next"] = calculate_pivots(results[0])
         if "pivots" in results[1].keys() and results[1]['pivots']['next'] is not {}\
                 and results[1]['pivots']['current'] is not {}:
@@ -847,7 +847,7 @@ def update_cpr():
             pivots['prev'] = calculate_pivots(results[2])
 
         print(ticker)
-        writeResult = md.pmdb["DerivativeAnalysis"].update(
+        writeResult = md.pmdb["DerivativeAnalysisResult"].update(
             {"_id": results[0]['_id']},
             {"$set": {"pivot_points": pivots}}, False
         )
@@ -884,6 +884,7 @@ def save_option_data_to_db():
 # update_position_priority()
 
 def nse_derivative_loader_main():
+    # print("Function called successfully")
     update_stock_data()
 
     update_index_data()

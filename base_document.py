@@ -11,7 +11,7 @@ class BaseDocument:
   @classmethod
   def get_collection(cls):
     collection_name = cls.meta.get("collection", None)
-    
+    print(collection_name)
     if collection_name is None:
       raise Error("No collection name provided")
     return database[collection_name]
@@ -96,11 +96,16 @@ class BaseDocument:
     updated_doc = cls.validate_schema(kwargs)
 
     result = cls.get_collection().update_one(condition, {"$set": updated_doc}, **{"upsert": True})
+    print(result)
     return cls.get(**condition) if result.acknowledged else None
       
   @classmethod
   def delete(cls, id):
     cls.get_collection().delete_one({"_id": ObjectId(id)})
+
+  @classmethod
+  def deleteMany(cls, **kwargs):
+    cls.get_collection().delete_many(kwargs)
       
   @classmethod
   def list(cls, **kwargs):

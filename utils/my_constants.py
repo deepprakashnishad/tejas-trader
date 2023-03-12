@@ -40,3 +40,5 @@ DELIVERY_WEIGHT = 0.02
 
 DAYS_FOR_AVG_DELIVERY = 5
 DAYS_FOR_CHANGE_MEAN = 20
+
+static_oi_data = {"nifty":[], "banknifty":[]}

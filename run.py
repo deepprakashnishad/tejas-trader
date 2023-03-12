@@ -3,7 +3,9 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from mongoengine_jsonencoder import MongoEngineJSONEncoder
 from utils import my_constants as mconst
-from utils.utilities import is_access_token_valid
+from utils.utilities import is_access_token_valid, is_time_between
+from core.option_chain_analyzer import OptionChainAnalyzer as oca
+import datetime as dt
 
 app = Flask(__name__)
 CORS(app)
@@ -16,14 +18,30 @@ app.register_blueprint(api_bp, url_prefix='/api')
 
 from model import db, MongoEngineJSONEncoder
 from run_tejas import start_tejas
+from apscheduler.schedulers.background import BackgroundScheduler
 import threading
-import time
 
 app.json_encoder = MongoEngineJSONEncoder
 db.init_app(app)
 global stop_threads
 
 tejas_thread = threading.Thread(target=start_tejas, name='tejas')
+
+def fetch_live_index_oi():
+    if is_time_between(dt.time(9, 15), dt.time(15,30)):
+        oca.getIndexOI()
+    else:
+        print("Market Closed")
+
+def clean_live_index_oi():
+    if is_time_between(dt.time(9, 0), dt.time(9,2)):
+        print("Cleaning in progress")
+        oca.cleanIndexOI()
+
+sched = BackgroundScheduler(daemon=True)
+sched.add_job(fetch_live_index_oi,'interval',minutes=1)
+sched.add_job(clean_live_index_oi,'interval',minutes=1)
+sched.start()
 
 @app.route('/')
 def hello_world():
