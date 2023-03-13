@@ -20,28 +20,32 @@ from model import db, MongoEngineJSONEncoder
 from run_tejas import start_tejas
 from apscheduler.schedulers.background import BackgroundScheduler
 import threading
-
+import time 
 app.json_encoder = MongoEngineJSONEncoder
 db.init_app(app)
 global stop_threads
-
-tejas_thread = threading.Thread(target=start_tejas, name='tejas')
 
 def fetch_live_index_oi():
     if is_time_between(dt.time(9, 15), dt.time(15,30)):
         oca.getIndexOI()
     else:
-        print("Market Closed")
+        if  dt.datetime.now().time() > dt.time(15,30):
+            print("Market Closed")
 
 def clean_live_index_oi():
     if is_time_between(dt.time(9, 0), dt.time(9,2)):
         print("Cleaning in progress")
         oca.cleanIndexOI()
 
+# def scheduleLiveIndexFetch():
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(fetch_live_index_oi,'interval',minutes=1)
-sched.add_job(clean_live_index_oi,'interval',minutes=1)
+sched.add_job(fetch_live_index_oi,'cron', day_of_week='mon-fri', hour='09-16', minute='*', timezone='Asia/Kolkata')
+sched.add_job(clean_live_index_oi,'cron', day_of_week='mon-fri', hour=9, timezone='Asia/Kolkata')
 sched.start()
+
+tejas_thread = threading.Thread(target=start_tejas, name='tejas')
+# live_index_thread = threading.Thread(target=scheduleLiveIndexFetch, name='live_index_oi_update')
+# live_index_thread.start()
 
 @app.route('/')
 def hello_world():
