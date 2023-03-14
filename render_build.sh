@@ -7,6 +7,6 @@ wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz \
   && make \
   && make install \
   && cd ~ \
-  && sudo rm -rf ta-lib/ \
+  && rm -rf ta-lib/ \
   && pip install ta-lib \
   && pip install requirement.txt
