@@ -1,9 +1,3 @@
-wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
-tar -xzf ta-lib-0.4.0-src.tar.gz
-cd ta-lib/
-
-./configure
-make
-make install
-cd ..
+apt-get -y install gcc build-essential
 pip install ta-lib
+pip install requirement.txt
