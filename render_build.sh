@@ -1,12 +1,12 @@
-apt-get -y install gcc build-essential
+sudo apt-get -y install gcc build-essential
 wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz \
-  && tar -xzf ta-lib-0.4.0-src.tar.gz \
-  && rm ta-lib-0.4.0-src.tar.gz \
+  && sudo tar -xzf ta-lib-0.4.0-src.tar.gz \
+  && sudo rm ta-lib-0.4.0-src.tar.gz \
   && cd ta-lib/ \
-  && ./configure --prefix=/usr \
-  && make \
-  && make install \
+  && sudo ./configure --prefix=/usr \
+  && sudo make \
+  && sudo make install \
   && cd ~ \
-  && rm -rf ta-lib/ \
+  && sudo rm -rf ta-lib/ \
   && pip install ta-lib \
   && pip install requirement.txt
