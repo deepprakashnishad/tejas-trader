@@ -17,7 +17,7 @@ from app import api_bp
 app.register_blueprint(api_bp, url_prefix='/api')
 
 from model import db, MongoEngineJSONEncoder
-from run_tejas import start_tejas
+# from run_tejas import start_tejas
 from apscheduler.schedulers.background import BackgroundScheduler
 import threading
 import time 
@@ -43,30 +43,28 @@ sched.add_job(fetch_live_index_oi,'cron', day_of_week='mon-fri', hour='09-16', m
 sched.add_job(clean_live_index_oi,'cron', day_of_week='mon-fri', hour=9, timezone='Asia/Kolkata')
 sched.start()
 
-tejas_thread = threading.Thread(target=start_tejas, name='tejas')
-# live_index_thread = threading.Thread(target=scheduleLiveIndexFetch, name='live_index_oi_update')
-# live_index_thread.start()
+# tejas_thread = threading.Thread(target=start_tejas, name='tejas')
 
 @app.route('/')
 def hello_world():
     return 'Welcome to Kite Autotrader'
 
-@app.route('/start_tejas')
-def start_tejas():
-    stop_threads=True
-    time.sleep(4)
-    stop_threads=False
-    isAlive = tejas_thread.is_alive()
-    if not isAlive:
-        tejas_thread.start()
-        return 'Tejas Started'
-    else:
-        return 'Tejas already running'
+# @app.route('/start_tejas')
+# def start_tejas():
+#     stop_threads=True
+#     time.sleep(4)
+#     stop_threads=False
+#     isAlive = tejas_thread.is_alive()
+#     if not isAlive:
+#         tejas_thread.start()
+#         return 'Tejas Started'
+#     else:
+#         return 'Tejas already running'
 
-@app.route('/stop_tejas')
-def stop_tejas():
-    stop_threads=True
-    return 'Tejas Stopped'
+# @app.route('/stop_tejas')
+# def stop_tejas():
+#     stop_threads=True
+#     return 'Tejas Stopped'
 
 @app.route('/temp')
 def temp():
