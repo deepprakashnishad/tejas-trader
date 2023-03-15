@@ -26,6 +26,7 @@ db.init_app(app)
 global stop_threads
 
 def fetch_live_index_oi():
+    print("Fetching IndexOI Data")
     if is_time_between(dt.time(9, 15), dt.time(15,30)):
         oca.getIndexOI()
     else:
@@ -33,14 +34,13 @@ def fetch_live_index_oi():
             print("Market Closed")
 
 def clean_live_index_oi():
-    if is_time_between(dt.time(9, 0), dt.time(9,2)):
-        print("Cleaning in progress")
-        oca.cleanIndexOI()
+    print("Cleaning in progress")
+    oca.cleanIndexOI()
 
 # def scheduleLiveIndexFetch():
 sched = BackgroundScheduler(daemon=True)
 sched.add_job(fetch_live_index_oi,'cron', day_of_week='mon-fri', hour='09-16', minute='*', timezone='Asia/Kolkata')
-sched.add_job(clean_live_index_oi,'cron', day_of_week='mon-fri', hour=9, timezone='Asia/Kolkata')
+sched.add_job(clean_live_index_oi,'cron', day_of_week='mon-fri', hour=9, minute='*', timezone='Asia/Kolkata')
 sched.start()
 
 # tejas_thread = threading.Thread(target=start_tejas, name='tejas')

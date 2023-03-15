@@ -494,6 +494,6 @@ class IndexOptionChainResource(Resource):
                     mconst.static_oi_data['banknifty'].append(r)
         return jsonify(mconst.static_oi_data)
 
-    def delete(self, id):
+    def delete(self):
         oca.cleanIndexOI()
         return
