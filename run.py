@@ -40,7 +40,7 @@ def clean_live_index_oi():
 # def scheduleLiveIndexFetch():
 sched = BackgroundScheduler(daemon=True)
 sched.add_job(fetch_live_index_oi,'cron', day_of_week='mon-fri', hour='09-16', minute='*', timezone='Asia/Kolkata')
-sched.add_job(clean_live_index_oi,'cron', day_of_week='mon-fri', hour=9, minute='*', timezone='Asia/Kolkata')
+sched.add_job(clean_live_index_oi,'cron', day_of_week='mon-fri', hour=9, minute='01-10', timezone='Asia/Kolkata')
 sched.start()
 
 # tejas_thread = threading.Thread(target=start_tejas, name='tejas')
