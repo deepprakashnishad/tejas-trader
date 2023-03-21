@@ -11,7 +11,6 @@ class BaseDocument:
   @classmethod
   def get_collection(cls):
     collection_name = cls.meta.get("collection", None)
-    print(collection_name)
     if collection_name is None:
       raise Error("No collection name provided")
     return database[collection_name]

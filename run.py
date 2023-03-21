@@ -38,8 +38,9 @@ def clean_live_index_oi():
     oca.cleanIndexOI()
 
 # def scheduleLiveIndexFetch():
+print("Scheduling Jobs")
 sched = BackgroundScheduler(daemon=True)
-sched.add_job(fetch_live_index_oi,'cron', day_of_week='mon-fri', hour='09-16', minute='*', timezone='Asia/Kolkata')
+sched.add_job(fetch_live_index_oi,'cron', day_of_week='mon-fri', hour='*', minute='*', timezone='Asia/Kolkata')
 sched.add_job(clean_live_index_oi,'cron', day_of_week='mon-fri', hour=9, minute='01-10', timezone='Asia/Kolkata')
 sched.start()
 
